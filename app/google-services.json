@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "375817078093",
+    "project_id": "woor2-bd210",
+    "storage_bucket": "woor2-bd210.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:375817078093:android:dfd6b690180bf6493da304",
+        "android_client_info": {
+          "package_name": "com.example.woor2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "375817078093-6v9mfd0t8e3eof90fnvgj8chuag2l771.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBs7F_zwh89LfBmgCUgcUZt-HFNob475_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "375817078093-6v9mfd0t8e3eof90fnvgj8chuag2l771.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
