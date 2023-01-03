@@ -30,7 +30,7 @@ class ProfileFragment: Fragment() {
         binding.button.setOnClickListener { //임시 로그아웃 버튼
             Firebase.auth.signOut()
             startActivity(
-                Intent(activity, LoginActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
+                Intent(activity, LoginActivity::class.java)
             )
         }
     }

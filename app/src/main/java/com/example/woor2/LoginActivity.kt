@@ -6,9 +6,11 @@ import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.woor2.databinding.ActivityLoginBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import kotlin.system.exitProcess
 
 
 class LoginActivity: AppCompatActivity() {
@@ -52,8 +54,7 @@ class LoginActivity: AppCompatActivity() {
             backPressedTime = System.currentTimeMillis()
             Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
         } else {
-            finish()
+            ActivityCompat.finishAffinity(this);
         }
-
     }
 }
