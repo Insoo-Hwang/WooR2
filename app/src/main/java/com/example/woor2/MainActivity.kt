@@ -1,11 +1,16 @@
 package com.example.woor2
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.woor2.databinding.ActivityMainBinding
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 private const val TAG_PLAN = "plan_fragment"
 private const val TAG_SEARCH = "search_fragment"
@@ -81,7 +86,18 @@ class MainActivity : AppCompatActivity() {
                 ft.show(profile)
             }
         }
+
         //마무리
         ft.commitAllowingStateLoss()
+    }
+
+    private var backPressedTime: Long = 0 // backbutton 2번에 종료
+    override fun onBackPressed() {
+        if(System.currentTimeMillis() - backPressedTime >= 2000) {
+            backPressedTime = System.currentTimeMillis()
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        } else {
+            finish()
+        }
     }
 }
