@@ -37,7 +37,7 @@ class IntroActivity: AppCompatActivity() {
 
             else {
                 startActivity(
-                    Intent(this@IntroActivity, MainActivity::class.java) // 로그인 상태면 메인 화면으로
+                    Intent(this@IntroActivity, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)// 로그인 상태면 메인 화면으로
                 )
             }
             finish()
