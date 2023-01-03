@@ -17,14 +17,6 @@ class LoginActivity: AppCompatActivity() {
         val binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.id.setOnClickListener { //아이디 터치 시 힌트 삭제
-            binding.id.hint = ""
-        }
-
-        binding.password.setOnClickListener { //패스워드 터치 시 힌트 삭제
-            binding.password.hint = ""
-        }
-
         binding.loginButton.setOnClickListener { //로그인 버튼 클릭 리스너
             val id = binding.id.text.toString()
             val password = binding.password.text.toString()
