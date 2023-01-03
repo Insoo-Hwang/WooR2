@@ -20,6 +20,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/navi_menu"/>
+        app:menu="@menu/navi_menu"
+        android:theme="@style/Theme.Material3.Dark"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
