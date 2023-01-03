@@ -28,6 +28,7 @@ class LoginActivity: AppCompatActivity() {
                 logIn(id, password)
             }
         }
+
     }
 
     private fun logIn(id: String, password: String) { // 로그인을 처리하는 함수
@@ -43,5 +44,15 @@ class LoginActivity: AppCompatActivity() {
                     Toast.makeText(this, "로그인에 실패하였습니다. 아이디와 비밀번호를 확인해주세요", Toast.LENGTH_SHORT).show()
                 }
             }
+    }
+
+    private var backPressedTime: Long = 0 // backbutton 2번에 종료
+    override fun onBackPressed() {
+        if(System.currentTimeMillis() - backPressedTime >= 2000) {
+            backPressedTime = System.currentTimeMillis()
+            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
+        } else {
+            finish()
+        }
     }
 }
