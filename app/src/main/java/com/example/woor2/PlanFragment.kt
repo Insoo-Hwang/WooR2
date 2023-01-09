@@ -22,7 +22,7 @@ class PlanFragment: Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentPlanBinding.inflate(inflater, container, false)
-        val recyclerView = binding.recycleView
+        val recyclerView = binding.planrecycleView
         adapter = PlanAdapter(viewModel)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
