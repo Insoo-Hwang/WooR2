@@ -26,8 +26,8 @@ class ProfileFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.textView5.text = Firebase.auth.currentUser?.uid // 테스트용 유저확인
-        binding.button.setOnClickListener { //임시 로그아웃 버튼
+        binding.uidText.text = Firebase.auth.currentUser?.uid // 테스트용 유저확인
+        binding.logoutButton.setOnClickListener { //로그아웃 버튼
             Firebase.auth.signOut()
             startActivity(
                 Intent(activity, LoginActivity::class.java)
