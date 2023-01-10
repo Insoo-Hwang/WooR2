@@ -10,8 +10,8 @@ class SearchAdapter(private val viewModel: SearchViewModel) :RecyclerView.Adapte
     inner class ViewHolder(private val binding: SearchLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun setContents(pos: Int){
             with(viewModel.items[pos]){
-                binding.textView9.text = name
-                binding.textView10.text = phone
+                binding.SearchTitle.text = title
+                binding.SearchLocation.text = location
             }
         }
     }

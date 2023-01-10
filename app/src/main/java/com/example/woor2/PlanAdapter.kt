@@ -9,8 +9,9 @@ class PlanAdapter(private val viewModel: PlanViewModel) :RecyclerView.Adapter<Pl
     inner class ViewHolder(private val binding: PlanLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun setContents(pos: Int){
             with(viewModel.items[pos]){
-                binding.textView5.text = name
-                binding.textView6.text = phone
+                binding.PlanTitle.text = title
+                binding.PlanLocation.text = location
+                binding.PlanDate.text = date
             }
         }
     }

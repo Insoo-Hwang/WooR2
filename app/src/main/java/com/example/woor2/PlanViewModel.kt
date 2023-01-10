@@ -2,15 +2,15 @@ package com.example.woor2
 
 import androidx.lifecycle.ViewModel
 
-data class Item(val name : String, val phone : String)
+data class Item1(val title : String, val location : String, val date : String)
 class PlanViewModel : ViewModel() {
-    val items = ArrayList<Item>()
+    val items = ArrayList<Item1>()
 
     init {
-        addItem(Item("hello", "1234"))
+        addItem(Item1("홍대 카페투어", "홍대", "2023-01-10"))
     }
 
-    fun addItem(item: Item){
+    fun addItem(item: Item1){
         items.add(item)
     }
 }

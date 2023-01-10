@@ -10,8 +10,9 @@ class BoardAdapter(private val viewModel: BoardViewModel) :RecyclerView.Adapter<
     inner class ViewHolder(private val binding: BoardLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun setContents(pos: Int){
             with(viewModel.items[pos]){
-                binding.textView7.text = name
-                binding.textView8.text = phone
+                binding.BoardTitle.text = title
+                binding.BoardWriter.text = writer
+                binding.BoardDate.text = date
             }
         }
     }
