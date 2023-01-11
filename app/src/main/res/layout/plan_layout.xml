@@ -9,20 +9,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:height="100px"
+        android:text="TextView"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/PlanLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:height="100px"
+        android:text="TextView"
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/PlanDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="TextView" />
+        android:height="100px"
+        android:text="TextView"
+        android:textSize="24sp" />
 
 </LinearLayout>
