@@ -1,9 +1,7 @@
 package com.example.woor2
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -37,11 +35,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setFragment(tag: String, fragment: Fragment) { //바텀 내비 설정용 함수
-        var manager: FragmentManager = supportFragmentManager
+        val manager: FragmentManager = supportFragmentManager
         val ft: FragmentTransaction = manager.beginTransaction()
 
         //트랜잭션에 tag로 전달된 fragment가 없을 경우 add
-        if(manager.findFragmentByTag(tag) == null){
+        if(manager.findFragmentByTag(tag) == null) {
             ft.add(R.id.mainFrameLayout, fragment, tag)
         }
 

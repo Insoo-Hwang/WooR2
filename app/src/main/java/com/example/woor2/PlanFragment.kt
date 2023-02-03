@@ -21,13 +21,23 @@ class PlanFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+
         binding = FragmentPlanBinding.inflate(inflater, container, false)
         val recyclerView = binding.planrecycleView
         adapter = PlanAdapter(viewModel)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+
+        binding.plusButton.setOnClickListener {
+            startActivity(
+                Intent(activity, AddingPlanActivity::class.java)
+            )
+        }
+
         return binding.root
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
