@@ -18,6 +18,10 @@
             android:exported="true" />
 
         <activity
+            android:name=".AddingPlanActivity"
+            android:exported="true" />
+
+        <activity
             android:name=".IntroActivity"
             android:exported="true"
             >
