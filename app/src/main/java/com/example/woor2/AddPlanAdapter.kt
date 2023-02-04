@@ -3,27 +3,20 @@ package com.example.woor2
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.example.woor2.databinding.AddplanLayoutBinding
+import com.example.woor2.databinding.BoardLayoutBinding
 import com.example.woor2.databinding.PlanLayoutBinding
 
-class PlanAdapter(private val viewModel: PlanViewModel) :RecyclerView.Adapter<PlanAdapter.ViewHolder>(){
-    inner class ViewHolder(private val binding: PlanLayoutBinding) : RecyclerView.ViewHolder(binding.root){
+class AddPlanAdapter(private val viewModel: AddPlanViewModel) :RecyclerView.Adapter<AddPlanAdapter.ViewHolder>(){
+    inner class ViewHolder(private val binding: AddplanLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun setContents(pos: Int){
             with(viewModel.items[pos]){
-                binding.PlanTitle.text = title
-                binding.PlanDate.text = date
-            }
-            binding.root.setOnClickListener {
-                viewModel.itemClickEvent.value = pos
-            }
-            binding.root.setOnClickListener {
-                viewModel.itemLongClick = pos
-                false
             }
         }
     }
     override fun onCreateViewHolder(parent : ViewGroup, viewType : Int): ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = PlanLayoutBinding.inflate(layoutInflater, parent, false)
+        val binding = AddplanLayoutBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
     }
 
@@ -34,5 +27,4 @@ class PlanAdapter(private val viewModel: PlanViewModel) :RecyclerView.Adapter<Pl
     override fun getItemCount(): Int {
         return viewModel.items.size
     }
-
 }
