@@ -23,8 +23,13 @@ class AddingPlanActivity: AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
         binding.AddPlanButton.setOnClickListener {
-            viewModel.addItem(Item4(binding.LocationTextview.text.toString()))
-            binding.LocationTextview.setText("")
+            if(binding.LocationTextview.text.toString().equals("")){
+                Toast.makeText(this, "장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                viewModel.addItem(Item4(binding.LocationTextview.text.toString()))
+                binding.LocationTextview.setText("")
+            }
         }
         binding.PlanSaveButton.setOnClickListener {
             startActivity(
