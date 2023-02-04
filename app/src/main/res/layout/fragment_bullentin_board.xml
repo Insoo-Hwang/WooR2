@@ -34,7 +34,7 @@
         android:layout_height="0dp"
         android:background="#00BCD4"
         android:clickable="false"
-        android:text="다른 사람과 내 이야기를 공유해보세요"
+        android:text="내 이야기를 공유해보세요"
         android:textAlignment="center"
         android:textColor="#3F41B5"
         android:textSize="25sp"
