@@ -11,6 +11,17 @@ class AddPlanAdapter(private val viewModel: AddPlanViewModel) :RecyclerView.Adap
     inner class ViewHolder(private val binding: AddplanLayoutBinding) : RecyclerView.ViewHolder(binding.root){
         fun setContents(pos: Int){
             with(viewModel.items[pos]){
+                binding.LocationText.text = location
+            }
+            binding.root.setOnClickListener {
+                viewModel.itemClickEvent.value = pos
+            }
+            binding.root.setOnClickListener {
+                viewModel.itemLongClick = pos
+                false
+            }
+            binding.DeleteButton.setOnClickListener {
+                viewModel.deleteItem(pos)
             }
         }
     }

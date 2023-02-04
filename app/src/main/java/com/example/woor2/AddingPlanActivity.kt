@@ -19,8 +19,12 @@ class AddingPlanActivity: AppCompatActivity() {
         binding.addplanrecycleView.adapter = adapter
         binding.addplanrecycleView.layoutManager = LinearLayoutManager(this)
         binding.addplanrecycleView.setHasFixedSize(true)
+        viewModel.itemsListData.observe(this){
+            adapter.notifyDataSetChanged()
+        }
         binding.AddPlanButton.setOnClickListener {
-            viewModel.addItem(Item4(""))
+            viewModel.addItem(Item4(binding.LocationTextview.text.toString()))
+            binding.LocationTextview.setText("")
         }
         binding.PlanSaveButton.setOnClickListener {
             startActivity(
