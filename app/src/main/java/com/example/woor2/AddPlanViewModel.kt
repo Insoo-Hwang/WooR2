@@ -2,24 +2,25 @@ package com.example.woor2
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-data class Item1(val title : String, val date : String)
-class PlanViewModel : ViewModel() {
-    val itemsListData = MutableLiveData<ArrayList<Item1>>()
-    val items = ArrayList<Item1>()
+
+data class Item4(val location : String)
+class AddPlanViewModel : ViewModel() {
+    val itemsListData = MutableLiveData<ArrayList<Item4>>()
+    val items = ArrayList<Item4>()
 
     val itemClickEvent = MutableLiveData<Int>()
     var itemLongClick = -1
 
-    init {
-        addItem(Item1("홍대 카페투어", "2023-01-10"))
-    }
+    /*init {
+        addItem(Item4(""))
+    }*/
 
-    fun addItem(item: Item1){
+    fun addItem(item: Item4){
         items.add(item)
         itemsListData.value = items
     }
 
-    fun updateItem(pos : Int, item : Item1){
+    fun updateItem(pos : Int, item : Item4){
         items[pos] = item
         itemsListData.value = items
     }
