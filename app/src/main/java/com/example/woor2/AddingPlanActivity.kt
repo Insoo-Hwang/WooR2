@@ -7,6 +7,9 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.woor2.databinding.ActivityAddingPlanBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class AddingPlanActivity: AppCompatActivity() {
     private val viewModel by viewModels<AddPlanViewModel>()
@@ -31,11 +34,22 @@ class AddingPlanActivity: AppCompatActivity() {
                 binding.LocationTextview.setText("")
             }
         }
+        val db : FirebaseFirestore = Firebase.firestore
+        val schedulesRef = db.collection("schedules")
+        val title = binding.NameText.text.toString()
+        val date = binding.DateText.text.toString()
+        val scheduleMap = hashMapOf(
+            "title" to title,
+            "date" to date
+        )
         binding.PlanSaveButton.setOnClickListener {
+            schedulesRef.add(scheduleMap)
+                .addOnSuccessListener {  }.addOnFailureListener{}
             startActivity(
                 Intent(this, MainActivity::class.java)
             )
             Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
         }
+
     }
 }

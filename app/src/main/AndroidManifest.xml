@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCSREzSybuVKnkYA_EsJJRf4hlxzPtKQ3M"/>
+
         <activity android:name=".MainActivity"
             android:exported="false" />
 
