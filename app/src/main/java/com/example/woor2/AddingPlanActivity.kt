@@ -36,13 +36,14 @@ class AddingPlanActivity: AppCompatActivity() {
         }
         val db : FirebaseFirestore = Firebase.firestore
         val schedulesRef = db.collection("schedules")
-        val title = binding.NameText.text.toString()
-        val date = binding.DateText.text.toString()
-        val scheduleMap = hashMapOf(
-            "title" to title,
-            "date" to date
-        )
+
         binding.PlanSaveButton.setOnClickListener {
+            val title = binding.NameText.text.toString()
+            val date = binding.DateText.text.toString()
+            val scheduleMap = hashMapOf(
+                "title" to title,
+                "date" to date
+            )
             schedulesRef.add(scheduleMap)
                 .addOnSuccessListener {  }.addOnFailureListener{}
             startActivity(
