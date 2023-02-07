@@ -40,16 +40,21 @@ class AddingPlanActivity: AppCompatActivity() {
         binding.PlanSaveButton.setOnClickListener {
             val title = binding.NameText.text.toString()
             val date = binding.DateText.text.toString()
-            val scheduleMap = hashMapOf(
-                "title" to title,
-                "date" to date
-            )
-            schedulesRef.add(scheduleMap)
-                .addOnSuccessListener {  }.addOnFailureListener{}
-            startActivity(
-                Intent(this, MainActivity::class.java)
-            )
-            Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            if(title.equals("") || date.equals("")){
+                Toast.makeText(this, "필수값을 입력해주세요.", Toast.LENGTH_SHORT).show()
+            }
+            else {
+                val scheduleMap = hashMapOf(
+                    "title" to title,
+                    "date" to date
+                )
+                schedulesRef.add(scheduleMap)
+                    .addOnSuccessListener { }.addOnFailureListener {}
+                startActivity(
+                    Intent(this, MainActivity::class.java)
+                )
+                Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
 
     }

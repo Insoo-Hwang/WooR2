@@ -15,7 +15,7 @@ class PlanAdapter(private val viewModel: PlanViewModel) :RecyclerView.Adapter<Pl
             binding.root.setOnClickListener {
                 viewModel.itemClickEvent.value = pos
             }
-            binding.root.setOnClickListener {
+            binding.root.setOnLongClickListener {
                 viewModel.itemLongClick = pos
                 false
             }

@@ -29,6 +29,9 @@ class PlanFragment: Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+        viewModel.itemsListData.observe(viewLifecycleOwner){
+            adapter.notifyDataSetChanged()
+        }
 
         binding.plusButton.setOnClickListener {
             startActivity(
