@@ -16,6 +16,7 @@ class PlanFragment: Fragment() {
     private val viewModel by viewModels<PlanViewModel>()
     private lateinit var adapter: PlanAdapter
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -43,4 +44,3 @@ class PlanFragment: Fragment() {
     }
 }
 
-//https://learn.hansung.ac.kr/mod/vod/viewer.php?id=367355

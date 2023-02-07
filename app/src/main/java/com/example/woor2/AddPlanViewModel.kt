@@ -11,10 +11,6 @@ class AddPlanViewModel : ViewModel() {
     val itemClickEvent = MutableLiveData<Int>()
     var itemLongClick = -1
 
-    /*init {
-        addItem(Item4(""))
-    }*/
-
     fun addItem(item: Item4){
         items.add(item)
         itemsListData.value = items

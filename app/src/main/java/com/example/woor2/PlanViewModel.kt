@@ -2,6 +2,10 @@ package com.example.woor2
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+
 data class Item1(val title : String, val date : String)
 class PlanViewModel : ViewModel() {
     val itemsListData = MutableLiveData<ArrayList<Item1>>()
@@ -11,7 +15,7 @@ class PlanViewModel : ViewModel() {
     var itemLongClick = -1
 
     init {
-        addItem(Item1("홍대 카페투어", "2023-01-10"))
+        updateList()
     }
 
     fun addItem(item: Item1){
@@ -27,5 +31,14 @@ class PlanViewModel : ViewModel() {
     fun deleteItem(pos : Int){
         items.removeAt(pos)
         itemsListData.value = items
+    }
+
+    fun updateList(){
+        val db = FirebaseFirestore.getInstance()
+        db.collection("schedules").get().addOnSuccessListener {
+            for(doc in it){
+                addItem(Item1(doc["title"].toString(), doc["date"].toString()))
+            }
+        }
     }
 }
