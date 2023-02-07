@@ -26,7 +26,7 @@ class AddingPlanActivity: AppCompatActivity() {
             adapter.notifyDataSetChanged()
         }
         binding.AddPlanButton.setOnClickListener {
-            if(binding.LocationTextview.text.toString().equals("")){
+            if(binding.LocationTextview.text.toString() == ""){
                 Toast.makeText(this, "장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
@@ -40,7 +40,7 @@ class AddingPlanActivity: AppCompatActivity() {
         binding.PlanSaveButton.setOnClickListener {
             val title = binding.NameText.text.toString()
             val date = binding.DateText.text.toString()
-            if(title.equals("") || date.equals("")){
+            if(title == "" || date == ""){
                 Toast.makeText(this, "필수값을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {

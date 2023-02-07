@@ -42,7 +42,8 @@ private lateinit var binding: ActivityMapsBinding
 
         // Add a marker in Sydney and move the camera
         val sydney = LatLng(-34.0, 151.0)
-        mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        val korea = LatLng(37.5665, 126.9780)
+        mMap.addMarker(MarkerOptions().position(korea).title("Marker in Korea"))
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(korea))
     }
 }
