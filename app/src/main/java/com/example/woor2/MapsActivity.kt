@@ -1,31 +1,95 @@
 package com.example.woor2
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Context
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
-
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.woor2.databinding.ActivityMapsBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.woor2.databinding.ActivityMapsBinding
+
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
 private lateinit var binding: ActivityMapsBinding
+    var myMarker: MarkerOptions? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-     binding = ActivityMapsBinding.inflate(layoutInflater)
-     setContentView(binding.root)
+        binding = ActivityMapsBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
-                .findFragmentById(R.id.map) as SupportMapFragment
+            .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        binding.searchButton.setOnClickListener {
+            if (binding.editText.text.toString().isNotEmpty()) {
+                val location = getLocationFromAddress (applicationContext, binding.editText.text.toString());
+
+                if (location != null) {
+                    showCurrentLocation(location)
+                };
+            }
+        }
+    }
+
+    fun getLocationFromAddress(context: Context, address: String): Location? {
+        val geocoder = Geocoder(context)
+        val addresses: List<Address>?
+        val resLocation = Location("")
+        try {
+            addresses = geocoder.getFromLocationName(address, 5)
+            if (addresses == null || addresses.isEmpty()) {
+                return null
+            }
+            val addressLoc: Address = addresses[0]
+            resLocation.latitude = addressLoc.latitude
+            resLocation.longitude = addressLoc.longitude
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return resLocation
+    }
+
+    private fun showCurrentLocation(location: Location) {
+        val curPoint = LatLng(location.latitude, location.longitude)
+        val msg = """
+            Latitutde : ${curPoint.latitude}
+            Longitude : ${curPoint.longitude}
+            """.trimIndent()
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
+        //화면 확대, 숫자가 클수록 확대
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 15f))
+
+        //마커 찍기
+        val targetLocation = Location("")
+        targetLocation.latitude = 37.4937
+        targetLocation.longitude = 127.0643
+        showMyMarker(targetLocation)
+    }
+
+    private fun showMyMarker(location: Location) {
+        if (myMarker == null) {
+            myMarker = MarkerOptions()
+            myMarker!!.position(LatLng(location.latitude, location.longitude))
+            myMarker!!.title("◎ 내위치\n")
+            myMarker!!.snippet("여기가 어디지?")
+            //myMarker!!.icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocation))
+            mMap.addMarker(myMarker!!)
+        }
     }
 
     /**
@@ -47,3 +111,4 @@ private lateinit var binding: ActivityMapsBinding
         mMap.moveCamera(CameraUpdateFactory.newLatLng(korea))
     }
 }
+
