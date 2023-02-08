@@ -30,11 +30,10 @@ class SearchFragment: Fragment()  {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
-        viewModel.itemsListData.observe(viewLifecycleOwner){
-            adapter.notifyDataSetChanged()
-        }
+
         binding.SearchingButton.setOnClickListener{
             viewModel.deleteAll()
+            adapter.notifyDataSetChanged()
             val searchValue = binding.SearchText.text.toString()
             if(searchValue.equals("")){
                 Toast.makeText(context, "검색값을 입력해주세요.", Toast.LENGTH_LONG).show();
