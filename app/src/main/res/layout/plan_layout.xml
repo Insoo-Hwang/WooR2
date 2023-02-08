@@ -9,17 +9,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:height="100px"
+        android:width="400px"
+        android:height="200px"
         android:text="TextView"
-        android:textSize="24sp" />
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
     <TextView
         android:id="@+id/PlanDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:height="100px"
+        android:width="80sp"
+        android:height="200px"
         android:text="TextView"
-        android:textSize="24sp" />
+        android:textAlignment="center"
+        android:textSize="30sp" />
 
 </LinearLayout>

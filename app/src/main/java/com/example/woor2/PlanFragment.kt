@@ -16,13 +16,11 @@ class PlanFragment: Fragment() {
     private val viewModel by viewModels<PlanViewModel>()
     private lateinit var adapter: PlanAdapter
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         binding = FragmentPlanBinding.inflate(inflater, container, false)
         val recyclerView = binding.planrecycleView
         adapter = PlanAdapter(viewModel)
