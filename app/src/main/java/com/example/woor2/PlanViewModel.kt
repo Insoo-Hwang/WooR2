@@ -38,7 +38,6 @@ class PlanViewModel : ViewModel() {
         db.collection("schedules").get().addOnSuccessListener {
             for(doc in it){
                 addItem(Item1(doc["title"].toString(), doc["date"].toString()))
-                System.out.println(doc)
             }
         }
     }

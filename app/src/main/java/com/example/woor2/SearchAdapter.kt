@@ -11,7 +11,13 @@ class SearchAdapter(private val viewModel: SearchViewModel) :RecyclerView.Adapte
         fun setContents(pos: Int){
             with(viewModel.items[pos]){
                 binding.SearchTitle.text = title
-                binding.SearchLocation.text = location
+            }
+            binding.root.setOnClickListener {
+                viewModel.itemClickEvent.value = pos
+            }
+            binding.root.setOnLongClickListener {
+                viewModel.itemLongClick = pos
+                false
             }
         }
     }
