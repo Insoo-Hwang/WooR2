@@ -13,10 +13,6 @@ class SearchViewModel : ViewModel() {
     val itemClickEvent = MutableLiveData<Int>()
     var itemLongClick = -1
 
-    init {
-
-    }
-
     fun addItem(item: Item3){
         items.add(item)
     }
@@ -31,5 +27,9 @@ class SearchViewModel : ViewModel() {
         itemsListData.value = items
     }
 
-
+    fun deleteAll(){
+        while(items.isNotEmpty()){
+            deleteItem(0)
+        }
+    }
 }
