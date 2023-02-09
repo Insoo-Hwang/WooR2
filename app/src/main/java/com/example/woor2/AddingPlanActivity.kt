@@ -57,7 +57,7 @@ class AddingPlanActivity: AppCompatActivity() {
             }
         }
 
-        binding.LocationTextview.setOnClickListener {
+        binding.MapButton.setOnClickListener {
             startActivity(
                 Intent(this, MapsActivity::class.java)
             )
