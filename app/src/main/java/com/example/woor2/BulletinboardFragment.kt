@@ -26,7 +26,6 @@ class BulletinboardFragment: Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
-        adapter.notifyDataSetChanged()
 
         binding.AddButton.setOnClickListener{
             startActivity(
@@ -45,9 +44,4 @@ class BulletinboardFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    companion object {
-        fun newInstance(): BulletinboardFragment {
-            return BulletinboardFragment()
-        }
-    }
 }
