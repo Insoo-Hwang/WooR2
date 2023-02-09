@@ -1,5 +1,6 @@
 package com.example.woor2
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,10 +26,28 @@ class BulletinboardFragment: Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
+        adapter.notifyDataSetChanged()
+
+        binding.AddButton.setOnClickListener{
+            startActivity(
+                Intent(activity, AddBoardActivity::class.java)
+            )
+        }
+
+        binding.RefreshButton.setOnClickListener{
+            adapter.notifyDataSetChanged()
+        }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    companion object {
+        fun newInstance(): BulletinboardFragment {
+            return BulletinboardFragment()
+        }
     }
 }

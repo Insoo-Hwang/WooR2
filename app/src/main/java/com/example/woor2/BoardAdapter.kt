@@ -12,7 +12,13 @@ class BoardAdapter(private val viewModel: BoardViewModel) :RecyclerView.Adapter<
             with(viewModel.items[pos]){
                 binding.BoardTitle.text = title
                 binding.BoardWriter.text = writer
-                binding.BoardDate.text = date
+            }
+            binding.root.setOnClickListener {
+                viewModel.itemClickEvent.value = pos
+            }
+            binding.root.setOnLongClickListener {
+                viewModel.itemLongClick = pos
+                false
             }
         }
     }
