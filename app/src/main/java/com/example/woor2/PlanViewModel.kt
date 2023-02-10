@@ -6,7 +6,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-data class Item1(val title : String, val date : String)
+data class Item1(val title : String, val date : String, val id : String)
 class PlanViewModel : ViewModel() {
     val itemsListData = MutableLiveData<ArrayList<Item1>>()
     val items = ArrayList<Item1>()
@@ -37,7 +37,7 @@ class PlanViewModel : ViewModel() {
         val db = Firebase.firestore
         db.collection("schedules").get().addOnSuccessListener {
             for(doc in it){
-                addItem(Item1(doc["title"].toString(), doc["date"].toString()))
+                addItem(Item1(doc["title"].toString(), doc["date"].toString(), doc.id))
             }
         }
     }

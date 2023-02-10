@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-data class Item2(val title : String, val writer : String)
+data class Item2(val title : String, val writer : String, val id : String)
 class BoardViewModel : ViewModel() {
     val itemsListData = MutableLiveData<ArrayList<Item2>>()
     val items = ArrayList<Item2>()
@@ -35,7 +35,7 @@ class BoardViewModel : ViewModel() {
         val db = Firebase.firestore
         db.collection("boards").get().addOnSuccessListener {
             for(doc in it){
-                addItem(Item2(doc["title"].toString(), doc["user"].toString()))
+                addItem(Item2(doc["title"].toString(), doc["user"].toString(), doc.id))
             }
         }
     }
