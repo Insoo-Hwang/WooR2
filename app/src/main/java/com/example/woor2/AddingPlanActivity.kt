@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.woor2.databinding.ActivityAddingPlanBinding
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -40,13 +41,17 @@ class AddingPlanActivity: AppCompatActivity() {
         binding.PlanSaveButton.setOnClickListener {
             val title = binding.NameText.text.toString()
             val date = binding.DateText.text.toString()
+            val user = Firebase.auth.currentUser?.uid
+            val public = binding.PublicCheck.isChecked
             if(title == "" || date == ""){
                 Toast.makeText(this, "필수값을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
                 val scheduleMap = hashMapOf(
                     "title" to title,
-                    "date" to date
+                    "date" to date,
+                    "user" to user,
+                    "public" to public
                 )
                 schedulesRef.add(scheduleMap)
                     .addOnSuccessListener { }.addOnFailureListener {}

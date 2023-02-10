@@ -43,8 +43,9 @@ class SearchFragment: Fragment()  {
                 db.collection("schedules").whereEqualTo("title", searchValue).get()
                     .addOnSuccessListener {
                         for (doc in it) {
-                            viewModel.addItem(Item3(doc["title"].toString()))
-                            System.out.println(doc["title"])
+                            if(doc["public"] as Boolean) {
+                                viewModel.addItem(Item3(doc["title"].toString()))
+                            }
                         }
                     }
             }
