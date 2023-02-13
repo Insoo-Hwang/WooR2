@@ -28,8 +28,6 @@ class SearchViewModel : ViewModel() {
     }
 
     fun deleteAll(){
-        while(items.isNotEmpty()){
-            deleteItem(0)
-        }
+        items.clear()
     }
 }
