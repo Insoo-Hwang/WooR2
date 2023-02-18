@@ -38,7 +38,7 @@ class AddingPlanActivity: AppCompatActivity() {
                 Toast.makeText(this, "장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
-                viewModel.addItem(Item4(binding.LocationTextview.text.toString()))
+                viewModel.addItem(Item4(binding.LocationTextview.text.toString(), intentLatitude, intentLongitude))
                 binding.LocationTextview.setText("")
             }
         }
@@ -59,9 +59,7 @@ class AddingPlanActivity: AppCompatActivity() {
                     "date" to date,
                     "user" to user,
                     "public" to public,
-                    "location" to intentLocation,
-                    "latitude" to intentLatitude,
-                    "longitude" to intentLongitude
+                    "location" to intentLocation
                 )
                 schedulesRef.add(scheduleMap)
                     .addOnSuccessListener { }.addOnFailureListener {}
