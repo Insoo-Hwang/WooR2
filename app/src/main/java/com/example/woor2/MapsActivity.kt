@@ -1,10 +1,12 @@
 package com.example.woor2
 
 import android.content.Context
+import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.woor2.databinding.ActivityMapsBinding
@@ -12,7 +14,6 @@ import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 
@@ -20,14 +21,18 @@ import com.google.android.gms.maps.model.MarkerOptions
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
-private lateinit var binding: ActivityMapsBinding
-    var myMarker: MarkerOptions? = null
+    private lateinit var binding: ActivityMapsBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        var latitude = 0.0
+        var longitude = 0.0
+
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.confirmButton.visibility = View.INVISIBLE
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -38,14 +43,29 @@ private lateinit var binding: ActivityMapsBinding
             if (binding.editText.text.toString().isNotEmpty()) {
                 val location = getLocationFromAddress (applicationContext, binding.editText.text.toString());
 
+                binding.confirmButton.visibility = View.INVISIBLE
+
                 if (location != null) {
                     showCurrentLocation(location)
+                    latitude = location.latitude
+                    longitude = location.longitude
+                    binding.confirmButton.visibility = View.VISIBLE
                 };
             }
         }
+
+        binding.confirmButton.setOnClickListener {
+            val intent = Intent(this, AddingPlanActivity::class.java)
+            val loc = binding.editText.text.toString()
+
+            intent.putExtra("location", loc)
+            intent.putExtra("latitude", latitude)
+            intent.putExtra("longitude", longitude)
+            startActivity(intent)
+        }
     }
 
-    fun getLocationFromAddress(context: Context, address: String): Location? {
+    private fun getLocationFromAddress(context: Context, address: String): Location? {
         val geocoder = Geocoder(context)
         val addresses: List<Address>?
         val resLocation = Location("")
@@ -74,22 +94,13 @@ private lateinit var binding: ActivityMapsBinding
         //화면 확대, 숫자가 클수록 확대
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(curPoint, 15f))
 
-        //마커 찍기
+        /*
+        //마커 찍기 - 필요 없
         val targetLocation = Location("")
         targetLocation.latitude = 37.4937
         targetLocation.longitude = 127.0643
         showMyMarker(targetLocation)
-    }
-
-    private fun showMyMarker(location: Location) {
-        if (myMarker == null) {
-            myMarker = MarkerOptions()
-            myMarker!!.position(LatLng(location.latitude, location.longitude))
-            myMarker!!.title("◎ 내위치\n")
-            myMarker!!.snippet("여기가 어디지?")
-            //myMarker!!.icon(BitmapDescriptorFactory.fromResource(R.drawable.mylocation))
-            mMap.addMarker(myMarker!!)
-        }
+        */
     }
 
     /**
@@ -104,11 +115,10 @@ private lateinit var binding: ActivityMapsBinding
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        // Add a marker in Sydney and move the camera
-        val sydney = LatLng(-34.0, 151.0)
+
         val korea = LatLng(37.5665, 126.9780)
         mMap.addMarker(MarkerOptions().position(korea).title("Marker in Korea"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(korea))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(korea, 12f))
     }
 }
-

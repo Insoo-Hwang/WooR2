@@ -19,6 +19,13 @@ class AddingPlanActivity: AppCompatActivity() {
         val binding = ActivityAddingPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val e = intent.extras?:return
+        val intentLocation = e.getString("location")
+        val intentLatitude = e.getDouble("latitude")
+        val intentLongitude = e.getDouble("longitude")
+
+        binding.LocationTextview.setText(intentLocation)
+
         val adapter = AddPlanAdapter(viewModel)
         binding.addplanrecycleView.adapter = adapter
         binding.addplanrecycleView.layoutManager = LinearLayoutManager(this)
@@ -51,7 +58,10 @@ class AddingPlanActivity: AppCompatActivity() {
                     "title" to title,
                     "date" to date,
                     "user" to user,
-                    "public" to public
+                    "public" to public,
+                    "location" to intentLocation,
+                    "latitude" to intentLatitude,
+                    "longitude" to intentLongitude
                 )
                 schedulesRef.add(scheduleMap)
                     .addOnSuccessListener { }.addOnFailureListener {}

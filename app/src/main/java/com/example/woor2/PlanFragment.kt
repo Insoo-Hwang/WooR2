@@ -35,9 +35,10 @@ class PlanFragment: Fragment() {
         registerForContextMenu(binding.planrecycleView)
 
         binding.plusButton.setOnClickListener {
-            startActivity(
-                Intent(activity, AddingPlanActivity::class.java)
-            )
+            val intent = Intent(activity, AddingPlanActivity::class.java)
+
+            intent.putExtra("location", "")
+            startActivity(intent)
         }
 
         return binding.root
