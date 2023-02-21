@@ -3,7 +3,7 @@ package com.example.woor2
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-data class Item4(val location : String)
+data class Item4(val location : String, val latitude : Double, val longitude : Double)
 class AddPlanViewModel : ViewModel() {
     val itemsListData = MutableLiveData<ArrayList<Item4>>()
     val items = ArrayList<Item4>()

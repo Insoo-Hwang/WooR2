@@ -16,7 +16,7 @@
         android:layout_marginEnd="95dp"
         android:layout_marginRight="95dp"
         android:ems="10"
-        android:hint="한글 주소 입력"
+        android:hint="주소 입력"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#546E7A" />
@@ -43,7 +43,7 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="8dp"
         android:layout_toStartOf="@+id/editText"
-        android:text="확인" />
+        android:text="선택 완료" />
 
     <FrameLayout
         android:layout_width="match_parent"
