@@ -32,6 +32,11 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val e = intent.extras?:return
+        val intentName = e.getString("name")
+        val intentDate = e.getString("date")
+        val intentPublic = e.getBoolean("public")
+
         binding.confirmButton.visibility = View.INVISIBLE
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -61,6 +66,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             intent.putExtra("location", loc)
             intent.putExtra("latitude", latitude)
             intent.putExtra("longitude", longitude)
+            intent.putExtra("name", intentName)
+            intent.putExtra("date",intentDate)
+            intent.putExtra("public", intentPublic)
             startActivity(intent)
         }
     }
