@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.woor2.databinding.FragmentBullentinBoardBinding
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -58,7 +59,7 @@ class BulletinboardFragment: Fragment() {
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        val db : FirebaseFirestore = Firebase.firestore
+        val db = Firebase.firestore
         val boardsRef = db.collection("boards")
         val user = Firebase.auth.currentUser?.uid
         when(item.itemId){
@@ -77,4 +78,5 @@ class BulletinboardFragment: Fragment() {
         }
         return true
     }
+
 }
