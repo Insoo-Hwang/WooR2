@@ -23,7 +23,13 @@ class AddingPlanActivity: AppCompatActivity() {
         val intentLocation = e.getString("location")
         val intentLatitude = e.getDouble("latitude")
         val intentLongitude = e.getDouble("longitude")
+        val intentName = e.getString("name")
+        val intentDate = e.getString("date")
+        val intentPublic = e.getBoolean("public")
 
+        binding.NameText.setText(intentName)
+        binding.DateText.setText(intentDate)
+        binding.PublicCheck.isChecked = intentPublic
         binding.LocationTextview.setText(intentLocation)
 
         val adapter = AddPlanAdapter(viewModel)
@@ -59,7 +65,7 @@ class AddingPlanActivity: AppCompatActivity() {
                     "date" to date,
                     "user" to user,
                     "public" to public,
-                    "location" to intentLocation
+                    "location" to intentLocation,
                 )
                 schedulesRef.add(scheduleMap)
                     .addOnSuccessListener { }.addOnFailureListener {}
@@ -71,9 +77,12 @@ class AddingPlanActivity: AppCompatActivity() {
         }
 
         binding.MapButton.setOnClickListener {
-            startActivity(
-                Intent(this, MapsActivity::class.java)
-            )
+            val intent = Intent(this, MapsActivity::class.java)
+
+            intent.putExtra("name", binding.NameText.text.toString())
+            intent.putExtra("date", binding.DateText.text.toString())
+            intent.putExtra("public", binding.PublicCheck.isChecked)
+            startActivity(intent)
         }
     }
 }
