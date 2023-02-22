@@ -33,11 +33,11 @@ class AddBoardActivity : AppCompatActivity() {
                     "user" to user
                 )
                 boardsRef.add(boardMap)
-                    .addOnSuccessListener { }.addOnFailureListener {}
-                startActivity(
-                    Intent(this, MainActivity::class.java)
-                )
-                Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                    .addOnSuccessListener {
+                        Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                        onBackPressed()
+                    }
+                    .addOnFailureListener {Toast.makeText(this, "저장이 실패했습니다.", Toast.LENGTH_SHORT).show()}
             }
         }
     }
