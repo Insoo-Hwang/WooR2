@@ -19,7 +19,6 @@ class AddingPlanActivity: AppCompatActivity() {
         val binding = ActivityAddingPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        var code = -1
         val e = intent.extras?:return
         val intentLocation = e.getString("location")
         val intentLatitude = e.getDouble("latitude")
@@ -27,7 +26,7 @@ class AddingPlanActivity: AppCompatActivity() {
         val intentName = e.getString("name")
         val intentDate = e.getString("date")
         val intentPublic = e.getBoolean("public")
-        code = e.getInt("code")
+        var code = e.getInt("code")
 
         binding.NameText.setText(intentName)
         binding.DateText.setText(intentDate)
@@ -48,6 +47,7 @@ class AddingPlanActivity: AppCompatActivity() {
                         binding.NameText.setText(doc["title"].toString())
                         binding.DateText.setText(doc["date"].toString())
                         binding.PublicCheck.isChecked = doc["public"] as Boolean
+                        System.out.println(doc)
                         /*if(doc["size"].toString().toInt() != 0) {
                             val cc = 0
                             while(cc < doc["size"].toString().toInt()) {

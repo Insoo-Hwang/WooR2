@@ -1,6 +1,7 @@
 package com.example.woor2
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -50,6 +51,13 @@ class SearchFragment: Fragment()  {
                     }
             }
         }
+
+        viewModel.itemClickEvent.observe(viewLifecycleOwner){
+            val intent = Intent(activity, AddingPlanActivity::class.java)
+            intent.putExtra("code", viewModel.itemClickEvent.value!!.toInt())
+            startActivity(intent)
+        }
+
         return binding.root
     }
 
