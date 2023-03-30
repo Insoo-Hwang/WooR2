@@ -19,6 +19,7 @@ class AddingPlanActivity: AppCompatActivity() {
         val binding = ActivityAddingPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        var code = -1
         val e = intent.extras?:return
         val intentLocation = e.getString("location")
         val intentLatitude = e.getDouble("latitude")
@@ -26,6 +27,7 @@ class AddingPlanActivity: AppCompatActivity() {
         val intentName = e.getString("name")
         val intentDate = e.getString("date")
         val intentPublic = e.getBoolean("public")
+        code = e.getInt("code")
 
         binding.NameText.setText(intentName)
         binding.DateText.setText(intentDate)
@@ -36,6 +38,30 @@ class AddingPlanActivity: AppCompatActivity() {
         binding.addplanrecycleView.adapter = adapter
         binding.addplanrecycleView.layoutManager = LinearLayoutManager(this)
         binding.addplanrecycleView.setHasFixedSize(true)
+        if(code >= 0){
+            val db = Firebase.firestore
+            val user = Firebase.auth.currentUser?.uid
+            db.collection("schedules").get().addOnSuccessListener {
+                for(doc in it){
+                    if(code < 0) break
+                    if(doc["user"].toString().equals(user)) {
+                        binding.NameText.setText(doc["title"].toString())
+                        binding.DateText.setText(doc["date"].toString())
+                        binding.PublicCheck.isChecked = doc["public"] as Boolean
+                        /*if(doc["size"].toString().toInt() != 0) {
+                            val cc = 0
+                            while(cc < doc["size"].toString().toInt()) {
+                                System.out.println(doc["items"].)
+                                viewModel.addItem(Item4(node["location"].toString(), node["latitude"].toString().toDouble(), node["longitude"].toString().toDouble()))
+                                cc--
+                            }
+                        }*/
+                        code --
+                    }
+                }
+            }
+
+        }
         viewModel.itemsListData.observe(this){
             adapter.notifyDataSetChanged()
         }
@@ -56,6 +82,7 @@ class AddingPlanActivity: AppCompatActivity() {
             val date = binding.DateText.text.toString()
             val user = Firebase.auth.currentUser?.uid
             val public = binding.PublicCheck.isChecked
+
             if(title == "" || date == ""){
                 Toast.makeText(this, "필수값을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
@@ -65,7 +92,8 @@ class AddingPlanActivity: AppCompatActivity() {
                     "date" to date,
                     "user" to user,
                     "public" to public,
-                    "location" to intentLocation,
+                    "items" to viewModel.items,
+                    "count" to viewModel.items.size
                 )
                 schedulesRef.add(scheduleMap)
                     .addOnSuccessListener { }.addOnFailureListener {}
@@ -86,13 +114,4 @@ class AddingPlanActivity: AppCompatActivity() {
         }
     }
 
-    private var backPressedTime: Long = 0 // backbutton 2번에 종료
-    override fun onBackPressed() {
-        if(System.currentTimeMillis() - backPressedTime >= 2000) {
-            backPressedTime = System.currentTimeMillis()
-            Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
-        } else {
-            finish()
-        }
-    }
 }
