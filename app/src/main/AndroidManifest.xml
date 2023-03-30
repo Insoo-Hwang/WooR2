@@ -13,7 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light" >
-        <!-- @style/Theme.AppCompat.Light.NoActionBar-->
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+
+        <meta-data
+            android:name="android.app.lib_name"
+            android:value="" /> <!-- @style/Theme.AppCompat.Light.NoActionBar -->
         <!--
              TODO: Before you run your application, you need a Google Maps API key.
 
@@ -26,13 +33,15 @@
              "YOUR_API_KEY" string in this file with "${MAPS_API_KEY}".
         -->
         <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
+            android:name="com.kakao.sdk.AppKey"
+            android:value="826feb15fb92255731e2bde1d5d8a35b" />
 
         <activity
             android:name=".MapsActivity"
-            android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:exported="false" />
+        <activity
+            android:name=".MapsActivity2"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
