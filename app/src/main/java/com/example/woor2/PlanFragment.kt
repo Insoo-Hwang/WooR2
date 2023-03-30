@@ -44,6 +44,7 @@ class PlanFragment: Fragment() {
         binding.plusButton.setOnClickListener {
             val intent = Intent(activity, AddingPlanActivity::class.java)
             intent.putExtra("location", "")
+            intent.putExtra("code", -1)
             startActivity(intent)
         }
 
