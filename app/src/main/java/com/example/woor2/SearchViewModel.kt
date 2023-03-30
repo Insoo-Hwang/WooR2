@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-data class Item3(val title : String)
+data class Item3(val title : String, val id : String)
 class SearchViewModel : ViewModel() {
     val items = ArrayList<Item3>()
     val itemsListData = MutableLiveData<ArrayList<Item3>>()

@@ -45,7 +45,7 @@ class SearchFragment: Fragment()  {
                     .addOnSuccessListener {
                         for (doc in it) {
                             if(doc["public"] as Boolean) {
-                                viewModel.addItem(Item3(doc["title"].toString()))
+                                viewModel.addItem(Item3(doc["title"].toString(), doc.id))
                             }
                         }
                     }
@@ -54,7 +54,7 @@ class SearchFragment: Fragment()  {
 
         viewModel.itemClickEvent.observe(viewLifecycleOwner){
             val intent = Intent(activity, AddingPlanActivity::class.java)
-            intent.putExtra("code", viewModel.itemClickEvent.value!!.toInt())
+            intent.putExtra("code", viewModel.items[viewModel.itemClickEvent.value!!].id)
             startActivity(intent)
         }
 

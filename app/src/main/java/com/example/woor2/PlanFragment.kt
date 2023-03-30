@@ -34,13 +34,10 @@ class PlanFragment: Fragment() {
         }
         registerForContextMenu(binding.planrecycleView)
 
-        val db : FirebaseFirestore = Firebase.firestore
-        val schedulesRef = db.collection("schedules")
-        System.out.println(schedulesRef.get())
 
         viewModel.itemClickEvent.observe(viewLifecycleOwner){
             val intent = Intent(activity, AddingPlanActivity::class.java)
-            intent.putExtra("code", viewModel.itemClickEvent.value!!.toInt())
+            intent.putExtra("code", viewModel.items[viewModel.itemClickEvent.value!!].id)
             startActivity(intent)
         }
 
