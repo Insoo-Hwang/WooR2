@@ -9,6 +9,8 @@ import androidx.fragment.app.FragmentTransaction
 import com.example.woor2.databinding.ActivityMainBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.kakao.sdk.common.util.Utility
+
 
 private const val TAG_PLAN = "plan_fragment"
 private const val TAG_SEARCH = "search_fragment"
@@ -32,6 +34,9 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+        val keyHash = Utility.getKeyHash(this)
+        println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&keyHash = $keyHash MMMM")
     }
 
     private fun setFragment(tag: String, fragment: Fragment) { //바텀 내비 설정용 함수

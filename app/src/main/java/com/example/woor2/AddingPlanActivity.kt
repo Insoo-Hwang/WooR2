@@ -105,7 +105,7 @@ class AddingPlanActivity: AppCompatActivity() {
         }
 
         binding.MapButton.setOnClickListener {
-            val intent = Intent(this, MapsActivity::class.java)
+            val intent = Intent(this, MapsActivity2::class.java)
 
             intent.putExtra("name", binding.NameText.text.toString())
             intent.putExtra("date", binding.DateText.text.toString())
@@ -113,5 +113,4 @@ class AddingPlanActivity: AppCompatActivity() {
             startActivity(intent)
         }
     }
-
 }
