@@ -26,7 +26,7 @@ class AddingPlanActivity: AppCompatActivity() {
         val intentName = e.getString("name")
         val intentDate = e.getString("date")
         val intentPublic = e.getBoolean("public")
-        var code = e.getInt("code")
+        val code = e.getString("code")
 
         binding.NameText.setText(intentName)
         binding.DateText.setText(intentDate)
@@ -37,30 +37,13 @@ class AddingPlanActivity: AppCompatActivity() {
         binding.addplanrecycleView.adapter = adapter
         binding.addplanrecycleView.layoutManager = LinearLayoutManager(this)
         binding.addplanrecycleView.setHasFixedSize(true)
-        if(code >= 0){
-            val db = Firebase.firestore
-            val user = Firebase.auth.currentUser?.uid
-            db.collection("schedules").get().addOnSuccessListener {
-                for(doc in it){
-                    if(code < 0) break
-                    if(doc["user"].toString().equals(user)) {
-                        binding.NameText.setText(doc["title"].toString())
-                        binding.DateText.setText(doc["date"].toString())
-                        binding.PublicCheck.isChecked = doc["public"] as Boolean
-                        System.out.println(doc)
-                        /*if(doc["size"].toString().toInt() != 0) {
-                            val cc = 0
-                            while(cc < doc["size"].toString().toInt()) {
-                                System.out.println(doc["items"].)
-                                viewModel.addItem(Item4(node["location"].toString(), node["latitude"].toString().toDouble(), node["longitude"].toString().toDouble()))
-                                cc--
-                            }
-                        }*/
-                        code --
-                    }
-                }
-            }
 
+        val db : FirebaseFirestore = Firebase.firestore
+        val schedulesRef = db.collection("schedules")
+        db.collection("schedules").document(code.toString()).get().addOnSuccessListener {
+            binding.NameText.setText(it["title"].toString())
+            binding.DateText.setText(it["date"].toString())
+            binding.PublicCheck.isChecked = it["public"] as Boolean
         }
         viewModel.itemsListData.observe(this){
             adapter.notifyDataSetChanged()
@@ -74,8 +57,6 @@ class AddingPlanActivity: AppCompatActivity() {
                 binding.LocationTextview.setText("")
             }
         }
-        val db : FirebaseFirestore = Firebase.firestore
-        val schedulesRef = db.collection("schedules")
 
         binding.PlanSaveButton.setOnClickListener {
             val title = binding.NameText.text.toString()
