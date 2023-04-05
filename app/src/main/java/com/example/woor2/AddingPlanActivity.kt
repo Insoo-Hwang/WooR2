@@ -11,6 +11,7 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.google.gson.Gson
 
 class AddingPlanActivity: AppCompatActivity() {
     private val viewModel by viewModels<AddPlanViewModel>()
@@ -40,11 +41,19 @@ class AddingPlanActivity: AppCompatActivity() {
 
         val db : FirebaseFirestore = Firebase.firestore
         val schedulesRef = db.collection("schedules")
-        db.collection("schedules").document(code.toString()).get().addOnSuccessListener {
-            binding.NameText.setText(it["title"].toString())
-            binding.DateText.setText(it["date"].toString())
-            binding.PublicCheck.isChecked = it["public"] as Boolean
+        if(code != null) {
+            db.collection("schedules").document(code.toString()).get().addOnSuccessListener {
+                binding.NameText.setText(it["title"].toString())
+                binding.DateText.setText(it["date"].toString())
+                binding.PublicCheck.isChecked = it["public"] as Boolean
+                val gson = Gson()
+                val jsonArray = gson.fromJson(it["items"].toString(), Array<LocData>::class.java)
+                for (data in jsonArray) {
+                    viewModel.addItem(Item4(data.location.toString(), data.latitude.toString().toDouble(), data.longitude.toString().toDouble()))
+                }
+            }
         }
+
         viewModel.itemsListData.observe(this){
             adapter.notifyDataSetChanged()
         }
@@ -64,7 +73,7 @@ class AddingPlanActivity: AppCompatActivity() {
             val user = Firebase.auth.currentUser?.uid
             val public = binding.PublicCheck.isChecked
 
-            if(title == "" || date == ""){
+            if(title == "" || date == "" || viewModel.items.isEmpty()){
                 Toast.makeText(this, "필수값을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
@@ -73,8 +82,7 @@ class AddingPlanActivity: AppCompatActivity() {
                     "date" to date,
                     "user" to user,
                     "public" to public,
-                    "items" to viewModel.items,
-                    "count" to viewModel.items.size
+                    "items" to viewModel.items
                 )
                 schedulesRef.add(scheduleMap)
                     .addOnSuccessListener { }.addOnFailureListener {}
@@ -95,3 +103,5 @@ class AddingPlanActivity: AppCompatActivity() {
         }
     }
 }
+
+data class LocData(val latitude: Double, val location: Int, val longitude: Double)
