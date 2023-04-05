@@ -1,9 +1,17 @@
 package com.example.woor2
 
+import android.content.Context
+import android.location.Address
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.woor2.databinding.ActivityMaps2Binding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.LatLng
+import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
 import java.util.Timer
 import kotlin.concurrent.schedule
@@ -25,8 +33,16 @@ class MapsActivity2: AppCompatActivity() {
         mapViewContainer.addView(mapView)
 
         startTracking()
-        Timer().schedule(1000) {
+        Timer().schedule(2000) {
             stopTracking()
+        }
+
+        binding.searchBtn.setOnClickListener {
+            val location = getLocationFromAddress (applicationContext, binding.editTextSearch.text.toString())
+
+            if (location != null) {
+                showCurrentLocation(location)
+            }
         }
     }
 
@@ -38,5 +54,36 @@ class MapsActivity2: AppCompatActivity() {
     // 위치추적 중지
     private fun stopTracking() {
         mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
+    }
+
+    private fun getLocationFromAddress(context: Context, address: String): Location? {
+        val geocoder = Geocoder(context)
+        val addresses: List<Address>?
+        val resLocation = Location("")
+        try {
+            addresses = geocoder.getFromLocationName(address, 5)
+            if (addresses == null || addresses.isEmpty()) {
+                return null
+            }
+            val addressLoc: Address = addresses[0]
+            resLocation.latitude = addressLoc.latitude
+            resLocation.longitude = addressLoc.longitude
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return resLocation
+    }
+
+    private fun showCurrentLocation(location: Location) {
+        val curPoint = LatLng(location.latitude, location.longitude)
+        /*
+        val msg = """
+            Latitutde : ${curPoint.latitude}
+            Longitude : ${curPoint.longitude}
+            """.trimIndent()
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+         */
+
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(curPoint.latitude, curPoint.longitude), true);
     }
 }
