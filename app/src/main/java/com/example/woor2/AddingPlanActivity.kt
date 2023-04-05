@@ -100,9 +100,7 @@ class AddingPlanActivity: AppCompatActivity() {
                 }else{
                     db.collection("schedules").document(code.toString()).update(scheduleMap as Map<String, Any>)
                 }
-                startActivity(
-                    Intent(this, MainActivity::class.java)
-                )
+                onBackPressed()
                 Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
             }
         }
