@@ -28,6 +28,8 @@ class AddingPlanActivity: AppCompatActivity() {
         val intentDate = e.getString("date")
         val intentPublic = e.getBoolean("public")
         val code = e.getString("code")
+        val mode = e.getInt("mode")
+        var copy = false
 
         binding.NameText.setText(intentName)
         binding.DateText.setText(intentDate)
@@ -41,15 +43,22 @@ class AddingPlanActivity: AppCompatActivity() {
 
         val db : FirebaseFirestore = Firebase.firestore
         val schedulesRef = db.collection("schedules")
-        if(code != null) {
+        if(mode != 1) {
             db.collection("schedules").document(code.toString()).get().addOnSuccessListener {
+                copy = it["copy"] as Boolean
                 binding.NameText.setText(it["title"].toString())
                 binding.DateText.setText(it["date"].toString())
-                binding.PublicCheck.isChecked = it["public"] as Boolean
+                if(mode == 2 || copy) {
+                    binding.PublicCheck.isEnabled = false
+                    binding.PublicCheck.isChecked = false
+                    copy = true
+                }
+                else
+                    binding.PublicCheck.isChecked = it["public"] as Boolean
                 val gson = Gson()
                 val jsonArray = gson.fromJson(it["items"].toString(), Array<LocData>::class.java)
                 for (data in jsonArray) {
-                    viewModel.addItem(Item4(data.location.toString(), data.latitude.toString().toDouble(), data.longitude.toString().toDouble()))
+                    viewModel.addItem(Item4(data.location, data.latitude.toString().toDouble(), data.longitude.toString().toDouble()))
                 }
             }
         }
@@ -67,6 +76,7 @@ class AddingPlanActivity: AppCompatActivity() {
             }
         }
 
+
         binding.PlanSaveButton.setOnClickListener {
             val title = binding.NameText.text.toString()
             val date = binding.DateText.text.toString()
@@ -82,10 +92,14 @@ class AddingPlanActivity: AppCompatActivity() {
                     "date" to date,
                     "user" to user,
                     "public" to public,
-                    "items" to viewModel.items
+                    "items" to viewModel.items,
+                    "copy" to copy
                 )
-                schedulesRef.add(scheduleMap)
-                    .addOnSuccessListener { }.addOnFailureListener {}
+                if(mode != 0) {
+                    schedulesRef.add(scheduleMap)
+                }else{
+                    db.collection("schedules").document(code.toString()).update(scheduleMap as Map<String, Any>)
+                }
                 startActivity(
                     Intent(this, MainActivity::class.java)
                 )
@@ -104,4 +118,4 @@ class AddingPlanActivity: AppCompatActivity() {
     }
 }
 
-data class LocData(val latitude: Double, val location: Int, val longitude: Double)
+data class LocData(val location: String, val latitude: Double, val longitude: Double)

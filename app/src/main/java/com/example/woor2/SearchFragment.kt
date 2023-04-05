@@ -55,6 +55,7 @@ class SearchFragment: Fragment()  {
         viewModel.itemClickEvent.observe(viewLifecycleOwner){
             val intent = Intent(activity, AddingPlanActivity::class.java)
             intent.putExtra("code", viewModel.items[viewModel.itemClickEvent.value!!].id)
+            intent.putExtra("mode", 2)
             startActivity(intent)
         }
 
