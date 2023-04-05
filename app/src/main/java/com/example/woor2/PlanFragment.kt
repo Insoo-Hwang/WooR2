@@ -38,6 +38,7 @@ class PlanFragment: Fragment() {
         viewModel.itemClickEvent.observe(viewLifecycleOwner){
             val intent = Intent(activity, AddingPlanActivity::class.java)
             intent.putExtra("code", viewModel.items[viewModel.itemClickEvent.value!!].id)
+            intent.putExtra("mode", 0)
             startActivity(intent)
         }
 
@@ -45,6 +46,7 @@ class PlanFragment: Fragment() {
             val intent = Intent(activity, AddingPlanActivity::class.java)
             intent.putExtra("location", "")
             intent.putExtra("code", -1)
+            intent.putExtra("mode", 1)
             startActivity(intent)
         }
 
