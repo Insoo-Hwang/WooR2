@@ -64,6 +64,9 @@ dependencies {
     implementation "com.google.android.gms:play-services-maps:18.1.0"
     implementation 'com.google.maps.android:places-ktx:0.4.0'
     implementation 'com.google.android.libraries.places:places:3.0.0'
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+    implementation 'com.google.firebase:firebase-dynamic-links-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 
     implementation "com.kakao.sdk:v2-all:2.13.0" // 전체 모듈 설치, 2.11.0 버전부터 지원
     implementation "com.kakao.sdk:v2-user:2.13.0" // 카카오 로그인
