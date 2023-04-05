@@ -73,7 +73,7 @@ class AddingPlanActivity: AppCompatActivity() {
             val user = Firebase.auth.currentUser?.uid
             val public = binding.PublicCheck.isChecked
 
-            if(title == "" || date == ""){
+            if(title == "" || date == "" || viewModel.items.isEmpty()){
                 Toast.makeText(this, "필수값을 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
@@ -82,8 +82,7 @@ class AddingPlanActivity: AppCompatActivity() {
                     "date" to date,
                     "user" to user,
                     "public" to public,
-                    "items" to viewModel.items,
-                    "count" to viewModel.items.size
+                    "items" to viewModel.items
                 )
                 schedulesRef.add(scheduleMap)
                     .addOnSuccessListener { }.addOnFailureListener {}
