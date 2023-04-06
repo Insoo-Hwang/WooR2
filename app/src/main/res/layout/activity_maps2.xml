@@ -17,8 +17,9 @@
 
     <EditText
         android:id="@+id/editTextSearch"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:ems="10"
@@ -27,6 +28,7 @@
         android:minHeight="48dp"
         android:textColorHint="#546E7A"
         app:layout_constraintEnd_toStartOf="@+id/searchBtn"
+        app:layout_constraintStart_toEndOf="@+id/AddButton"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -37,6 +39,16 @@
         android:layout_marginEnd="16dp"
         android:text="검색"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/AddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="장소 추가"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

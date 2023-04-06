@@ -1,10 +1,13 @@
 package com.example.woor2
 
+import android.app.Activity
 import android.content.Context
+import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -32,6 +35,16 @@ class MapsActivity2: AppCompatActivity() {
         val mapViewContainer = binding.mapView as ViewGroup
         mapViewContainer.addView(mapView)
 
+        val e = intent.extras?:return
+        val intentName = e.getString("name")
+        val intentDate = e.getString("date")
+        val intentPublic = e.getBoolean("public")
+        var latitude = 0.0
+        var longitude = 0.0
+        var loc = ""
+
+        binding.AddButton.visibility = View.INVISIBLE
+
         startTracking()
         Timer().schedule(2000) {
             stopTracking()
@@ -42,7 +55,29 @@ class MapsActivity2: AppCompatActivity() {
 
             if (location != null) {
                 showCurrentLocation(location)
+                latitude = location.latitude
+                longitude = location.longitude
+                loc = binding.editTextSearch.text.toString()
+                binding.AddButton.visibility = View.VISIBLE
             }
+        }
+
+        binding.AddButton.setOnClickListener {
+            val intent = Intent(this, AddingPlanActivity::class.java)
+
+            intent.putExtra("name", intentName)
+            intent.putExtra("date", intentDate)
+            intent.putExtra("public", intentPublic)
+            intent.putExtra("location", loc)
+            intent.putExtra("latitude", latitude)
+            intent.putExtra("longitude", longitude)
+
+            intent.putExtra("code", -1)
+            intent.putExtra("mode", 1)
+
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+            setResult(Activity.RESULT_OK, intent)
+            startActivity(intent)
         }
     }
 
