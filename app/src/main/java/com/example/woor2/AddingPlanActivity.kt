@@ -1,5 +1,6 @@
 package com.example.woor2
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
@@ -14,27 +15,21 @@ import com.google.firebase.ktx.Firebase
 import com.google.gson.Gson
 
 class AddingPlanActivity: AppCompatActivity() {
+
     private val viewModel by viewModels<AddPlanViewModel>()
+    private lateinit var binding: ActivityAddingPlanBinding
+    private var latitude = 0.0
+    private var longitude = 0.0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding = ActivityAddingPlanBinding.inflate(layoutInflater)
+        binding = ActivityAddingPlanBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         val e = intent.extras?:return
-        val intentLocation = e.getString("location")
-        val intentLatitude = e.getDouble("latitude")
-        val intentLongitude = e.getDouble("longitude")
-        val intentName = e.getString("name")
-        val intentDate = e.getString("date")
-        val intentPublic = e.getBoolean("public")
         val code = e.getString("code")
         val mode = e.getInt("mode")
         var copy = false
-
-        binding.NameText.setText(intentName)
-        binding.DateText.setText(intentDate)
-        binding.PublicCheck.isChecked = intentPublic
-        binding.LocationTextview.setText(intentLocation)
 
         val adapter = AddPlanAdapter(viewModel)
         binding.addplanrecycleView.adapter = adapter
@@ -71,7 +66,7 @@ class AddingPlanActivity: AppCompatActivity() {
                 Toast.makeText(this, "장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
-                viewModel.addItem(Item4(binding.LocationTextview.text.toString(), intentLatitude, intentLongitude))
+                viewModel.addItem(Item4(binding.LocationTextview.text.toString(), latitude, longitude))
                 binding.LocationTextview.setText("")
             }
         }
@@ -107,11 +102,18 @@ class AddingPlanActivity: AppCompatActivity() {
 
         binding.MapButton.setOnClickListener {
             val intent = Intent(this, MapsActivity2::class.java)
+            startActivityForResult(intent, 1)
+        }
+    }
 
-            intent.putExtra("name", binding.NameText.text.toString())
-            intent.putExtra("date", binding.DateText.text.toString())
-            intent.putExtra("public", binding.PublicCheck.isChecked)
-            startActivity(intent)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                binding.LocationTextview.setText(data.getStringExtra("location"))
+                latitude = data.getDoubleExtra("latitude", 0.0)
+                longitude = data.getDoubleExtra("longitude", 0.0)
+            }
         }
     }
 }
