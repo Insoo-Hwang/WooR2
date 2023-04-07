@@ -35,10 +35,6 @@ class MapsActivity2: AppCompatActivity() {
         val mapViewContainer = binding.mapView as ViewGroup
         mapViewContainer.addView(mapView)
 
-        val e = intent.extras?:return
-        val intentName = e.getString("name")
-        val intentDate = e.getString("date")
-        val intentPublic = e.getBoolean("public")
         var latitude = 0.0
         var longitude = 0.0
         var loc = ""
@@ -65,19 +61,15 @@ class MapsActivity2: AppCompatActivity() {
         binding.AddButton.setOnClickListener {
             val intent = Intent(this, AddingPlanActivity::class.java)
 
-            intent.putExtra("name", intentName)
-            intent.putExtra("date", intentDate)
-            intent.putExtra("public", intentPublic)
             intent.putExtra("location", loc)
             intent.putExtra("latitude", latitude)
             intent.putExtra("longitude", longitude)
-
             intent.putExtra("code", -1)
             intent.putExtra("mode", 1)
 
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             setResult(Activity.RESULT_OK, intent)
-            startActivity(intent)
+            finish()
         }
     }
 
