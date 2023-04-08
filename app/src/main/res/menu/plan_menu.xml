@@ -2,8 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/share"
+        android:icon="@android:drawable/ic_dialog_map"
+        android:title="공유" />
+
+    <item
         android:id="@+id/delete"
         android:icon="@android:drawable/ic_dialog_map"
         android:title="삭제" />
-
 </menu>
