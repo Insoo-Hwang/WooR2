@@ -43,7 +43,7 @@ class AddingPlanActivity: AppCompatActivity() {
                 copy = it["copy"] as Boolean
                 binding.NameText.setText(it["title"].toString())
                 binding.DateText.setText(it["date"].toString())
-                if(mode == 2 || copy) {
+                if(mode == 2 || mode == 3 || copy) {
                     binding.PublicCheck.isEnabled = false
                     binding.PublicCheck.isChecked = false
                     copy = true
@@ -95,8 +95,12 @@ class AddingPlanActivity: AppCompatActivity() {
                 }else{
                     db.collection("schedules").document(code.toString()).update(scheduleMap as Map<String, Any>)
                 }
-                onBackPressed()
                 Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                if(mode != 3) onBackPressed()
+                else {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
 

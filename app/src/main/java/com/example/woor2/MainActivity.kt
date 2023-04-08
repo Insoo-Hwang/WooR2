@@ -1,5 +1,7 @@
 package com.example.woor2
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import com.example.woor2.databinding.ActivityMainBinding
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
 import com.kakao.sdk.common.util.Utility
 
@@ -100,7 +103,8 @@ class MainActivity : AppCompatActivity() {
             backPressedTime = System.currentTimeMillis()
             Toast.makeText(this, "한번 더 누르면 종료됩니다.", Toast.LENGTH_SHORT).show()
         } else {
-            finish()
+            super.onBackPressed()
+            finishAffinity()
         }
     }
 }
