@@ -20,6 +20,7 @@ class AddingPlanActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAddingPlanBinding
     private var latitude = 0.0
     private var longitude = 0.0
+    private var mode = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class AddingPlanActivity: AppCompatActivity() {
 
         val e = intent.extras?:return
         val code = e.getString("code")
-        val mode = e.getInt("mode")
+        mode = e.getInt("mode")
         var copy = false
 
         val adapter = AddPlanAdapter(viewModel)
@@ -118,6 +119,14 @@ class AddingPlanActivity: AppCompatActivity() {
                 latitude = data.getDoubleExtra("latitude", 0.0)
                 longitude = data.getDoubleExtra("longitude", 0.0)
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (mode == 3) {
+            finishAffinity() // 앱 종료
+        } else {
+            super.onBackPressed() // 기본 뒤로가기 동작 수행
         }
     }
 }
