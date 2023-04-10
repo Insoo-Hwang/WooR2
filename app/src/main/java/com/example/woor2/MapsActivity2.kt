@@ -1,22 +1,22 @@
 package com.example.woor2
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
+import android.location.LocationManager
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.woor2.databinding.ActivityMaps2Binding
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.LatLng
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
-import java.util.Timer
+import java.util.*
 import kotlin.concurrent.schedule
 
 
@@ -24,6 +24,7 @@ class MapsActivity2: AppCompatActivity() {
 
     private lateinit var mapView: MapView
     private lateinit var binding: ActivityMaps2Binding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +42,12 @@ class MapsActivity2: AppCompatActivity() {
 
         binding.AddButton.visibility = View.INVISIBLE
 
-        startTracking()
-        Timer().schedule(2000) {
-            stopTracking()
+        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+        @SuppressLint("MissingPermission")
+        val currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
+        if (currentLocation != null) {
+            showCurrentLocation(currentLocation)
         }
 
         binding.searchBtn.setOnClickListener {
@@ -64,23 +68,11 @@ class MapsActivity2: AppCompatActivity() {
             intent.putExtra("location", loc)
             intent.putExtra("latitude", latitude)
             intent.putExtra("longitude", longitude)
-            intent.putExtra("code", -1)
-            intent.putExtra("mode", 1)
 
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
             setResult(Activity.RESULT_OK, intent)
             finish()
         }
-    }
-
-    // 위치추적 시작
-    private fun startTracking() {
-        mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading
-    }
-
-    // 위치추적 중지
-    private fun stopTracking() {
-        mapView.currentLocationTrackingMode = MapView.CurrentLocationTrackingMode.TrackingModeOff
     }
 
     private fun getLocationFromAddress(context: Context, address: String): Location? {
@@ -111,6 +103,6 @@ class MapsActivity2: AppCompatActivity() {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
          */
 
-        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(curPoint.latitude, curPoint.longitude), true);
+        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(curPoint.latitude, curPoint.longitude), true)
     }
 }

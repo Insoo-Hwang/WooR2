@@ -252,16 +252,13 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     // 위치 권한 요청 결과 처리
     private fun getDeviceLocation() {
-
         // 가장 최근 기계 위치 열기, null 일 수 있음, 위치가 사용 불가한 경우
         try {
             if (mLocationPermissionGranted) {
                 val locationResult = mFusedLocationProviderClient.lastLocation
                 locationResult.addOnCompleteListener(this) { task ->
-
                     //작업이 성공적으로 끝났을 경우
                     if (task.isSuccessful) {
-
                         //맵의 카메라 위치를 현재 위치로 설정
                         mLastKnownLocation = task.getResult()
                         if (mLastKnownLocation != null) {
