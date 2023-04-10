@@ -20,6 +20,7 @@ class AddingPlanActivity: AppCompatActivity() {
     private lateinit var binding: ActivityAddingPlanBinding
     private var latitude = 0.0
     private var longitude = 0.0
+    private var mode = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +29,7 @@ class AddingPlanActivity: AppCompatActivity() {
 
         val e = intent.extras?:return
         val code = e.getString("code")
-        val mode = e.getInt("mode")
+        mode = e.getInt("mode")
         var copy = false
 
         val adapter = AddPlanAdapter(viewModel)
@@ -43,7 +44,7 @@ class AddingPlanActivity: AppCompatActivity() {
                 copy = it["copy"] as Boolean
                 binding.NameText.setText(it["title"].toString())
                 binding.DateText.setText(it["date"].toString())
-                if(mode == 2 || copy) {
+                if(mode == 2 || mode == 3 || copy) {
                     binding.PublicCheck.isEnabled = false
                     binding.PublicCheck.isChecked = false
                     copy = true
@@ -95,8 +96,12 @@ class AddingPlanActivity: AppCompatActivity() {
                 }else{
                     db.collection("schedules").document(code.toString()).update(scheduleMap as Map<String, Any>)
                 }
-                onBackPressed()
                 Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
+                if(mode != 3) onBackPressed()
+                else {
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                }
             }
         }
 
@@ -114,6 +119,14 @@ class AddingPlanActivity: AppCompatActivity() {
                 latitude = data.getDoubleExtra("latitude", 0.0)
                 longitude = data.getDoubleExtra("longitude", 0.0)
             }
+        }
+    }
+
+    override fun onBackPressed() {
+        if (mode == 3) {
+            finishAffinity() // 앱 종료
+        } else {
+            super.onBackPressed() // 기본 뒤로가기 동작 수행
         }
     }
 }

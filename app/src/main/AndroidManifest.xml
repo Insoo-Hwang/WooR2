@@ -38,19 +38,37 @@
 
         <activity
             android:name=".MapsActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MapsActivity2"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".LoginActivity"
             android:exported="true" />
         <activity
             android:name=".AddingPlanActivity"
             android:exported="true" />
+        <activity
+            android:name=".LinkReceiverActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="woor2.com"
+                    android:scheme="https"/>
+
+                <data
+                    android:host="woor2.com"
+                    android:scheme="http"/>
+
+            </intent-filter>
+        </activity>
         <activity
             android:name=".AddBoardActivity"
             android:exported="true" />

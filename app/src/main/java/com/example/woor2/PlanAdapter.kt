@@ -34,5 +34,4 @@ class PlanAdapter(private val viewModel: PlanViewModel) :RecyclerView.Adapter<Pl
     override fun getItemCount(): Int {
         return viewModel.items.size
     }
-
 }
