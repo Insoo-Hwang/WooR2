@@ -76,5 +76,8 @@ dependencies {
     implementation "com.kakao.sdk:v2-navi:2.13.0" // 카카오내비
     implementation "com.kakao.sdk:v2-friend:2.13.0" // 카카오톡 소셜 피커, 리소스 번들 파일 포함
 
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
     implementation fileTree(dir: 'libs', includes: ['*.jar'])
 }
