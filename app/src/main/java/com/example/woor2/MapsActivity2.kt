@@ -9,12 +9,16 @@ import android.location.Location
 import android.location.LocationManager
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.woor2.databinding.ActivityMaps2Binding
 import com.google.android.gms.maps.model.LatLng
+import net.daum.mf.map.api.CalloutBalloonAdapter
 import net.daum.mf.map.api.MapPOIItem
 import net.daum.mf.map.api.MapPoint
 import net.daum.mf.map.api.MapView
@@ -40,6 +44,8 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         setContentView(binding.root)
 
         mapView = MapView(this)
+        mapView.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))  // 커스텀 말풍선 등록
+        mapView.setPOIItemEventListener(this)  // 마커 클릭 이벤트 리스너 등록
 
         val mapViewContainer = binding.mapView as ViewGroup
         mapViewContainer.addView(mapView)
@@ -58,8 +64,6 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         if (currentLocation != null) {
             showCurrentLocation(currentLocation)
         }
-
-
 
         binding.currentLocationFAB.setOnClickListener {
             if (currentLocation != null) {
@@ -114,14 +118,6 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
 
     private fun showCurrentLocation(location: Location) {
         val curPoint = LatLng(location.latitude, location.longitude)
-
-        /*
-        val msg = """
-            Latitutde : ${curPoint.latitude}
-            Longitude : ${curPoint.longitude}
-            """.trimIndent()
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
-         */
 
         mapView.setMapCenterPoint(
             MapPoint.mapPointWithGeoCoord(
@@ -179,12 +175,53 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         }
     }
 
+    // 커스텀 말풍선 클래스
+    class CustomBalloonAdapter(inflater: LayoutInflater): CalloutBalloonAdapter {
+        val mCalloutBalloon: View = inflater.inflate(R.layout.balloon_layout, null)
+        val name: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_name)
+        val address: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_address)
+
+        override fun getCalloutBalloon(poiItem: MapPOIItem?): View {
+            // 마커 클릭 시 나오는 말풍선
+            name.text = poiItem?.itemName   // 해당 마커의 정보 이용 가능
+            address.text = "getCalloutBalloon"
+            return mCalloutBalloon
+        }
+
+        override fun getPressedCalloutBalloon(poiItem: MapPOIItem?): View {
+            // 말풍선 클릭 시
+            address.text = "getPressedCalloutBalloon"
+            return mCalloutBalloon
+        }
+    }
+
     override fun onPOIItemSelected(mapView: MapView?, poiItem: MapPOIItem?) {
         // Handle POI item selection event
     }
 
     override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?, calloutBalloonButtonType: MapPOIItem.CalloutBalloonButtonType?) {
         // Handle callout balloon touch event
+        val builder = AlertDialog.Builder(this)
+        val itemList = arrayOf("장소 추가", "마커 삭제", "취소")
+        builder.setTitle("${poiItem?.itemName}")
+        builder.setItems(itemList) { dialog, which ->
+            when(which) {
+                0 -> {
+                    val intent = Intent(this, AddingPlanActivity::class.java)
+                    if (poiItem != null) {
+                        intent.putExtra("location", poiItem.itemName)
+                        getLocationFromAddress(applicationContext,poiItem.itemName.toString())?.let { intent.putExtra("latitude", it.latitude) }
+                        getLocationFromAddress(applicationContext,poiItem.itemName.toString())?.let { intent.putExtra("longitude", it.longitude) }
+                    }
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    setResult(RESULT_OK, intent)
+                    finish()
+                }
+                1 -> mapView?.removePOIItem(poiItem)    // 마커 삭제
+                2 -> dialog.dismiss()   // 대화상자 닫기
+            }
+        }
+        builder.show()
     }
 
     override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?) {
