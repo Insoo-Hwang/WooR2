@@ -1,8 +1,7 @@
 package com.example.woor2
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
-import android.content.Intent
+import android.content.*
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
