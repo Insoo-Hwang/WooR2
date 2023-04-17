@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         val keyHash = Utility.getKeyHash(this)
-        println("&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&keyHash = $keyHash MMMM")
+        println("--------------------------------------------------keyHash-------------------------------------------- = $keyHash -------------------------------------------")
     }
 
     private fun setFragment(tag: String, fragment: Fragment) { //바텀 내비 설정용 함수
