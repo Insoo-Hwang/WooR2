@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.example.woor2.databinding.FragmentProfileBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.google.zxing.integration.android.IntentIntegrator
 
 class ProfileFragment: Fragment() {
 
@@ -33,5 +34,13 @@ class ProfileFragment: Fragment() {
                 Intent(activity, LoginActivity::class.java)
             )
         }
+
+        binding.QrCheck.setOnClickListener {
+            startQR(requireView())
+        }
+    }
+
+    fun startQR(view : View){
+        IntentIntegrator(requireActivity()).setCameraId(0).initiateScan()
     }
 }
