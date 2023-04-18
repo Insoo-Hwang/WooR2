@@ -2,10 +2,13 @@ package com.example.woor2
 
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.woor2.databinding.ActivityAddingPlanBinding
 import com.google.firebase.auth.ktx.auth
@@ -21,6 +24,10 @@ class AddingPlanActivity: AppCompatActivity() {
     private var latitude = 0.0
     private var longitude = 0.0
     private var mode = -1
+    private val PERMISSION_REQUEST_ACCESS_FINE_LOCATION = 1
+    private val PERMISSION_REQUEST_ACCESS_COARSE_LOCATION = 1
+    private var mLocationPermissionGranted = false
+    private var mLocationPermissionGranted2 = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,8 +113,12 @@ class AddingPlanActivity: AppCompatActivity() {
         }
 
         binding.MapButton.setOnClickListener {
-            val intent = Intent(this, MapsActivity2::class.java)
-            startActivityForResult(intent, 1)
+            getLocationPermission()
+            getLocationPermission2()
+            if (mLocationPermissionGranted && mLocationPermissionGranted2) {
+                val intent = Intent(this, MapsActivity2::class.java)
+                startActivityForResult(intent, 1)
+            }
         }
     }
 
@@ -127,6 +138,47 @@ class AddingPlanActivity: AppCompatActivity() {
             finishAffinity() // 앱 종료
         } else {
             super.onBackPressed() // 기본 뒤로가기 동작 수행
+        }
+    }
+
+    // 장치 위치 사용 권한 요청
+    private fun getLocationPermission() {
+        // 권한을 요청, 결과는 콜백으로 조정됨
+        // 권한을 얻은 경우
+        if (ContextCompat.checkSelfPermission(
+                this.applicationContext,
+                android.Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mLocationPermissionGranted = true
+        }
+        // 권한 얻기에 실패한 경우
+        else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
+                PERMISSION_REQUEST_ACCESS_FINE_LOCATION
+            )
+        }
+    }
+
+    private fun getLocationPermission2() {
+        // 권한을 요청, 결과는 콜백으로 조정됨
+        // 권한을 얻은 경우
+        if (ContextCompat.checkSelfPermission(
+                this.applicationContext,
+                android.Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            mLocationPermissionGranted2 = true
+        }
+        // 권한 얻기에 실패한 경우
+        else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf(android.Manifest.permission.ACCESS_COARSE_LOCATION),
+                PERMISSION_REQUEST_ACCESS_COARSE_LOCATION
+            )
         }
     }
 }
