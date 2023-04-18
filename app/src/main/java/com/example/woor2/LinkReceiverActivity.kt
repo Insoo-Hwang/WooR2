@@ -23,7 +23,7 @@ class LinkReceiverActivity : AppCompatActivity(){
                 deeplink = pendingDynamicLinkData.link
             }
             if(deeplink != null) {
-                val regex = ".*\\?(.*)".toRegex()
+                val regex = ".*\\(.*)".toRegex()
                 val segment = regex.find(deeplink.toString())?.groupValues?.get(1)
                 val intent = Intent(this, AddingPlanActivity::class.java)
                 intent.putExtra("code", segment)
