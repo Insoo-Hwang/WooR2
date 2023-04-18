@@ -3,6 +3,7 @@ package com.example.woor2
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -16,6 +17,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.woor2.databinding.ActivityMaps2Binding
 import com.google.android.gms.maps.model.LatLng
 import net.daum.mf.map.api.CalloutBalloonAdapter
@@ -40,6 +43,7 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         binding = ActivityMaps2Binding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -53,8 +57,6 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         var latitude = 0.0
         var longitude = 0.0
         var loc = ""
-
-        binding.AddButton.visibility = View.INVISIBLE
 
         val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
 
@@ -80,11 +82,11 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
                 latitude = location.latitude
                 longitude = location.longitude
                 loc = binding.editTextSearch.text.toString()
-                binding.AddButton.visibility = View.VISIBLE
                 searchKeyword(loc)
             }
         }
 
+        /*
         binding.AddButton.setOnClickListener {
             val intent = Intent(this, AddingPlanActivity::class.java)
 
@@ -96,6 +98,7 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
             setResult(RESULT_OK, intent)
             finish()
         }
+         */
     }
 
     private fun getLocationFromAddress(context: Context, address: String): Location? {
@@ -180,17 +183,22 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         val mCalloutBalloon: View = inflater.inflate(R.layout.balloon_layout, null)
         val name: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_name)
         val address: TextView = mCalloutBalloon.findViewById(R.id.ball_tv_address)
+        val add: TextView = mCalloutBalloon.findViewById(R.id.textView)
 
         override fun getCalloutBalloon(poiItem: MapPOIItem?): View {
             // 마커 클릭 시 나오는 말풍선
             name.text = poiItem?.itemName   // 해당 마커의 정보 이용 가능
-            address.text = "getCalloutBalloon"
+            //address.text = "getCalloutBalloon"
+            address.text = ""
+            add.text = "클릭해서 추가"
             return mCalloutBalloon
         }
 
         override fun getPressedCalloutBalloon(poiItem: MapPOIItem?): View {
             // 말풍선 클릭 시
-            address.text = "getPressedCalloutBalloon"
+            //address.text = "getPressedCalloutBalloon"
+            address.text = ""
+            add.text = "클릭해서 추가"
             return mCalloutBalloon
         }
     }
@@ -202,7 +210,7 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
     override fun onCalloutBalloonOfPOIItemTouched(mapView: MapView?, poiItem: MapPOIItem?, calloutBalloonButtonType: MapPOIItem.CalloutBalloonButtonType?) {
         // Handle callout balloon touch event
         val builder = AlertDialog.Builder(this)
-        val itemList = arrayOf("장소 추가", "마커 삭제", "취소")
+        val itemList = arrayOf("장소 추가", "취소")
         builder.setTitle("${poiItem?.itemName}")
         builder.setItems(itemList) { dialog, which ->
             when(which) {
@@ -217,8 +225,7 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
                     setResult(RESULT_OK, intent)
                     finish()
                 }
-                1 -> mapView?.removePOIItem(poiItem)    // 마커 삭제
-                2 -> dialog.dismiss()   // 대화상자 닫기
+                1 -> dialog.dismiss()   // 대화상자 닫기
             }
         }
         builder.show()
@@ -231,4 +238,6 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
     override fun onDraggablePOIItemMoved(mapView: MapView?, poiItem: MapPOIItem?, mapPoint: MapPoint?) {
         // Handle draggable POI item move event
     }
+
+
 }
