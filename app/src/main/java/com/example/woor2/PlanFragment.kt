@@ -1,8 +1,7 @@
 package com.example.woor2
 
 import android.app.Activity
-import android.content.ActivityNotFoundException
-import android.content.Intent
+import android.content.*
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
@@ -13,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.woor2.databinding.FragmentPlanBinding
 import com.google.firebase.dynamiclinks.DynamicLink
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -76,8 +76,13 @@ class PlanFragment: Fragment() {
         val db : FirebaseFirestore = Firebase.firestore
         val schedulesRef = db.collection("schedules")
         when(item.itemId){
-            R.id.share -> {
+            R.id.share->{
                 onDynamicLinkClick(requireActivity(),viewModel.items[viewModel.itemLongClick].id)
+            }
+            R.id.shareQR -> {
+                val intent = Intent(requireActivity(), QrActivity::class.java)
+                intent.putExtra("key", viewModel.items[viewModel.itemLongClick].id.toString())
+                startActivity(intent)
             }
             R.id.delete -> {
                 Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_LONG).show();
@@ -90,18 +95,20 @@ class PlanFragment: Fragment() {
     }
 
     private fun getDeepLink(key: String): Uri {
-        return Uri.parse("https://woor2.com/?${key}")
+        return Uri.parse("https://woorii.com/${key}")
     }
 
-    fun onDynamicLinkClick(activity: Activity, key: String = "u9DC") {
+    fun onDynamicLinkClick(activity: Activity, key: String = "tV8u") {
         FirebaseDynamicLinks.getInstance().createDynamicLink()
             .setLink(getDeepLink(key))
-            .setDynamicLinkDomain("woor22.page.link")
+            .setDynamicLinkDomain("woorii.page.link")
             .setAndroidParameters(DynamicLink.AndroidParameters.Builder(activity.packageName).setMinimumVersion(1).build())
             .buildShortDynamicLink()
             .addOnCompleteListener(activity) { task ->
                 if (task.isSuccessful) {
                     val shortLink: Uri = task.result.shortLink!!
+                    System.out.println("#####################")
+                    System.out.println(shortLink)
                     try {
                         val sendIntent = Intent()
                         sendIntent.action = Intent.ACTION_SEND
@@ -109,9 +116,11 @@ class PlanFragment: Fragment() {
                         sendIntent.type = "text/plain"
                         activity.startActivity(Intent.createChooser(sendIntent, "Share"))
                     } catch (ignored: ActivityNotFoundException) {
+
                     }
                 }
             }
     }
+
 }
 

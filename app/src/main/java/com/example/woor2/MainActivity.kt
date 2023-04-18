@@ -12,6 +12,7 @@ import com.example.woor2.databinding.ActivityMainBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
+import com.google.zxing.integration.android.IntentIntegrator
 import com.kakao.sdk.common.util.Utility
 
 
@@ -105,6 +106,21 @@ class MainActivity : AppCompatActivity() {
         } else {
             super.onBackPressed()
             finishAffinity()
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        val result  = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
+        if(result != null){
+            if(result.contents != null){
+                System.out.println(result.contents)
+                val intent = Intent(this, AddingPlanActivity::class.java)
+                intent.putExtra("code", result.contents.toString())
+                intent.putExtra("mode", 3)
+                startActivity(intent)
+            }
+        }else{
+            super.onActivityResult(requestCode, resultCode, data)
         }
     }
 }

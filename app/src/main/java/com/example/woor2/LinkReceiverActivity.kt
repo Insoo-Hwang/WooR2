@@ -3,7 +3,6 @@ package com.example.woor2
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.dynamiclinks.ktx.dynamicLinks
 import com.google.firebase.ktx.Firebase
@@ -24,7 +23,7 @@ class LinkReceiverActivity : AppCompatActivity(){
                 deeplink = pendingDynamicLinkData.link
             }
             if(deeplink != null) {
-                val regex = ".*\\?(.*)".toRegex()
+                val regex = ".*\\(.*)".toRegex()
                 val segment = regex.find(deeplink.toString())?.groupValues?.get(1)
                 val intent = Intent(this, AddingPlanActivity::class.java)
                 intent.putExtra("code", segment)
