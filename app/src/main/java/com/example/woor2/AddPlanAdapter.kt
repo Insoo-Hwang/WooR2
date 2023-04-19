@@ -4,9 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.woor2.databinding.AddplanLayoutBinding
-import com.example.woor2.databinding.BoardLayoutBinding
-import com.example.woor2.databinding.PlanLayoutBinding
-import java.util.Collections
+import java.util.*
 
 class AddPlanAdapter(private val viewModel: AddPlanViewModel) :RecyclerView.Adapter<AddPlanAdapter.ViewHolder>(){
     inner class ViewHolder(private val binding: AddplanLayoutBinding) : RecyclerView.ViewHolder(binding.root){
@@ -29,6 +27,10 @@ class AddPlanAdapter(private val viewModel: AddPlanViewModel) :RecyclerView.Adap
             }
             binding.DownButton.setOnClickListener {
                 swap(pos, 1)
+            }
+            binding.LocationButton.setOnClickListener {
+                val url = "kakaomap://route?sp=${viewModel.getLat(pos-1)},${viewModel.getLon(pos-1)}&ep=${viewModel.getLat(pos)},${viewModel.getLon(pos)}&by=FOOT"
+                viewModel.openWebPage(url)
             }
         }
     }
