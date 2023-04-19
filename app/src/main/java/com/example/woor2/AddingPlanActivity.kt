@@ -53,8 +53,8 @@ class AddingPlanActivity: AppCompatActivity() {
                     binding.PublicCheck.isChecked = it["public"] as Boolean
                 val gson = Gson()
                 val jsonArray = gson.fromJson(it["items"].toString(), Array<LocData>::class.java)
-                for (data in jsonArray) {
-                    viewModel.addItem(Item4(data.location, data.latitude.toString().toDouble(), data.longitude.toString().toDouble()))
+                jsonArray.forEach {
+                    viewModel.addItem(Item4(it.location, it.latitude.toDouble(), it.longitude.toDouble()))
                 }
             }
         }
@@ -131,4 +131,4 @@ class AddingPlanActivity: AppCompatActivity() {
     }
 }
 
-data class LocData(val location: String, val latitude: Double, val longitude: Double)
+data class LocData(val location: String, val latitude: String, val longitude: String)
