@@ -60,8 +60,8 @@ class AddingPlanActivity: AppCompatActivity() {
                     binding.PublicCheck.isChecked = it["public"] as Boolean
                 val gson = Gson()
                 val jsonArray = gson.fromJson(it["items"].toString(), Array<LocData>::class.java)
-                for (data in jsonArray) {
-                    viewModel.addItem(Item4(data.location, data.latitude.toString().toDouble(), data.longitude.toString().toDouble()))
+                jsonArray.forEach {
+                    viewModel.addItem(Item4(it.location, it.latitude.toDouble(), it.longitude.toDouble()))
                 }
             }
         }
@@ -74,7 +74,9 @@ class AddingPlanActivity: AppCompatActivity() {
                 Toast.makeText(this, "장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
-                viewModel.addItem(Item4(binding.LocationTextview.text.toString(), latitude, longitude))
+                val temp = binding.LocationTextview.text.toString()
+                val new = temp.replace(" ", "_")
+                viewModel.addItem(Item4(new, latitude, longitude))
                 binding.LocationTextview.setText("")
             }
         }
@@ -104,11 +106,9 @@ class AddingPlanActivity: AppCompatActivity() {
                     db.collection("schedules").document(code.toString()).update(scheduleMap as Map<String, Any>)
                 }
                 Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                if(mode != 3) onBackPressed()
-                else {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+
             }
         }
 
@@ -183,4 +183,4 @@ class AddingPlanActivity: AppCompatActivity() {
     }
 }
 
-data class LocData(val location: String, val latitude: Double, val longitude: Double)
+data class LocData(val location: String, val latitude: String, val longitude: String)
