@@ -61,7 +61,7 @@ class AddingPlanActivity: AppCompatActivity() {
                 val gson = Gson()
                 val jsonArray = gson.fromJson(it["items"].toString(), Array<LocData>::class.java)
                 jsonArray.forEach {
-                    viewModel.addItem(Item4(it.location, it.latitude.toDouble(), it.longitude.toDouble()))
+                    viewModel.addItem(Item4(it.location.replace("_", " "), it.latitude.toDouble(), it.longitude.toDouble()))
                 }
             }
         }
@@ -74,9 +74,7 @@ class AddingPlanActivity: AppCompatActivity() {
                 Toast.makeText(this, "장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
-                val temp = binding.LocationTextview.text.toString()
-                val new = temp.replace(" ", "_")
-                viewModel.addItem(Item4(new, latitude, longitude))
+                viewModel.addItem(Item4(binding.LocationTextview.text.toString(), latitude, longitude))
                 binding.LocationTextview.setText("")
             }
         }
@@ -87,6 +85,10 @@ class AddingPlanActivity: AppCompatActivity() {
             val date = binding.DateText.text.toString()
             val user = Firebase.auth.currentUser?.uid
             val public = binding.PublicCheck.isChecked
+            for(i in viewModel.items){
+                val temp = i.location.replace(" ", "_")
+                i.location = temp
+            }
 
             if(title == "" || date == "" || viewModel.items.isEmpty()){
                 Toast.makeText(this, "필수값을 입력해주세요.", Toast.LENGTH_SHORT).show()
