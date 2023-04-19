@@ -74,7 +74,9 @@ class AddingPlanActivity: AppCompatActivity() {
                 Toast.makeText(this, "장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
             }
             else {
-                viewModel.addItem(Item4(binding.LocationTextview.text.toString(), latitude, longitude))
+                val temp = binding.LocationTextview.text.toString()
+                val new = temp.replace(" ", "_")
+                viewModel.addItem(Item4(new, latitude, longitude))
                 binding.LocationTextview.setText("")
             }
         }
