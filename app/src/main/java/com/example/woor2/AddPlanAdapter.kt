@@ -29,8 +29,13 @@ class AddPlanAdapter(private val viewModel: AddPlanViewModel) :RecyclerView.Adap
                 swap(pos, 1)
             }
             binding.LocationButton.setOnClickListener {
-                val url = "kakaomap://route?sp=${viewModel.getLat(pos-1)},${viewModel.getLon(pos-1)}&ep=${viewModel.getLat(pos)},${viewModel.getLon(pos)}&by=FOOT"
-                viewModel.openWebPage(url)
+                if(pos!=0) {
+                    val url =
+                        "kakaomap://route?sp=${viewModel.getLat(pos - 1)},${viewModel.getLon(pos - 1)}&ep=${
+                            viewModel.getLat(pos)
+                        },${viewModel.getLon(pos)}&by=PUBLICTRANSIT"
+                    viewModel.openWebPage(url)
+                }
             }
         }
     }
