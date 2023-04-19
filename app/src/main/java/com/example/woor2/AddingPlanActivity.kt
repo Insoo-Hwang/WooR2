@@ -106,11 +106,9 @@ class AddingPlanActivity: AppCompatActivity() {
                     db.collection("schedules").document(code.toString()).update(scheduleMap as Map<String, Any>)
                 }
                 Toast.makeText(this, "저장이 완료되었습니다.", Toast.LENGTH_SHORT).show()
-                if(mode != 3) onBackPressed()
-                else {
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                }
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+
             }
         }
 
