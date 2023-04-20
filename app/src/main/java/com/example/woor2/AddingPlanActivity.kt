@@ -119,8 +119,17 @@ class AddingPlanActivity: AppCompatActivity() {
             getLocationPermission2()
             if (mLocationPermissionGranted && mLocationPermissionGranted2) {
                 val intent = Intent(this, MapsActivity2::class.java)
+                intent.putExtra("mode", false)
+                intent.putExtra("array", viewModel.items)
                 startActivityForResult(intent, 1)
             }
+        }
+
+        binding.routeButton.setOnClickListener {
+            val intent = Intent(this, MapsActivity2::class.java)
+            intent.putExtra("mode", true)
+            intent.putExtra("array", viewModel.items)
+            startActivityForResult(intent, 2)
         }
     }
 
@@ -182,6 +191,10 @@ class AddingPlanActivity: AppCompatActivity() {
                 PERMISSION_REQUEST_ACCESS_COARSE_LOCATION
             )
         }
+    }
+
+    fun getSharedViewModel(): AddPlanViewModel {
+        return viewModel
     }
 }
 
