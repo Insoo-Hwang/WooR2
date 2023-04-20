@@ -3,7 +3,6 @@ package com.example.woor2
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -17,14 +16,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.example.woor2.databinding.ActivityMaps2Binding
 import com.google.android.gms.maps.model.LatLng
-import net.daum.mf.map.api.CalloutBalloonAdapter
-import net.daum.mf.map.api.MapPOIItem
-import net.daum.mf.map.api.MapPoint
-import net.daum.mf.map.api.MapView
+import net.daum.mf.map.api.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -44,49 +38,73 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMaps2Binding.inflate(layoutInflater)
-        setContentView(binding.root)
+        val e = intent.extras?:return
+        val array = e.getSerializable("array")
+        val mode = e.getBoolean("mode")
 
-        mapView = MapView(this)
-        mapView.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))  // 커스텀 말풍선 등록
-        mapView.setPOIItemEventListener(this)  // 마커 클릭 이벤트 리스너 등록
+        if (mode) {
+            binding = ActivityMaps2Binding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        val mapViewContainer = binding.mapView as ViewGroup
-        mapViewContainer.addView(mapView)
+            mapView = MapView(this)
+            val mapViewContainer = binding.mapView as ViewGroup
+            mapViewContainer.addView(mapView)
 
-        var latitude = 0.0
-        var longitude = 0.0
-        var loc = ""
+            drawPolyLine(array as ArrayList<Item4>)
 
-        val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+            binding.editTextSearch.visibility = View.INVISIBLE
 
-        @SuppressLint("MissingPermission")
-        val currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
-
-        if (currentLocation != null) {
-            showCurrentLocation(currentLocation)
+            binding.searchBtn.text = "닫기"
+            binding.searchBtn.setOnClickListener {
+                finish()
+            }
         }
+        else {
+            binding = ActivityMaps2Binding.inflate(layoutInflater)
+            setContentView(binding.root)
 
-        binding.currentLocationFAB.setOnClickListener {
+            mapView = MapView(this)
+            mapView.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))  // 커스텀 말풍선 등록
+            mapView.setPOIItemEventListener(this)  // 마커 클릭 이벤트 리스너 등록
+
+            val mapViewContainer = binding.mapView as ViewGroup
+            mapViewContainer.addView(mapView)
+
+            var latitude = 0.0
+            var longitude = 0.0
+            var loc = ""
+
+            val locationManager = getSystemService(LOCATION_SERVICE) as LocationManager
+
+            @SuppressLint("MissingPermission")
+            val currentLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER)
+
             if (currentLocation != null) {
                 showCurrentLocation(currentLocation)
             }
-        }
 
-        binding.searchBtn.setOnClickListener {
-            val location =
-                getLocationFromAddress(applicationContext, binding.editTextSearch.text.toString())
-
-            if (location != null) {
-                showCurrentLocation(location)
-                latitude = location.latitude
-                longitude = location.longitude
-                loc = binding.editTextSearch.text.toString()
-                searchKeyword(loc)
+            binding.currentLocationFAB.setOnClickListener {
+                if (currentLocation != null) {
+                    showCurrentLocation(currentLocation)
+                }
             }
-        }
 
-        /*
+            binding.searchBtn.setOnClickListener {
+                val location =
+                    getLocationFromAddress(
+                        applicationContext,
+                        binding.editTextSearch.text.toString()
+                    )
+
+                if (location != null) {
+                    showCurrentLocation(location)
+                    latitude = location.latitude
+                    longitude = location.longitude
+                    loc = binding.editTextSearch.text.toString()
+                    searchKeyword(loc)
+                }
+            }
+            /*
         binding.AddButton.setOnClickListener {
             val intent = Intent(this, AddingPlanActivity::class.java)
 
@@ -99,6 +117,7 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
             finish()
         }
          */
+        }
     }
 
     private fun getLocationFromAddress(context: Context, address: String): Location? {
@@ -239,5 +258,17 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         // Handle draggable POI item move event
     }
 
+    private fun drawPolyLine(arrayList: ArrayList<Item4>) {
+        val polyline = MapPolyline()
+        val size = arrayList.size
 
+        for (i in 0 until size) {
+            polyline.addPoint(MapPoint.mapPointWithGeoCoord(arrayList[i].latitude,arrayList[i].longitude))
+        }
+
+        mapView.addPolyline(polyline)
+        val mapPointBounds = MapPointBounds(polyline.mapPoints)
+        val padding = 100 // px
+        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, padding))
+    }
 }

@@ -3,10 +3,39 @@ package com.example.woor2
 import android.app.Application
 import android.content.Intent
 import android.net.Uri
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 
-data class Item4(var location : String, val latitude : Double, val longitude : Double)
+data class Item4(var location : String, val latitude : Double, val longitude : Double) :
+    Parcelable {
+    constructor(parcel: Parcel) : this(
+        parcel.readString() ?:"",
+        parcel.readDouble(),
+        parcel.readDouble()
+    )
+
+    override fun writeToParcel(parcel: Parcel, flags: Int) {
+        parcel.writeString(location)
+        parcel.writeDouble(latitude)
+        parcel.writeDouble(longitude)
+    }
+
+    override fun describeContents(): Int {
+        return 0
+    }
+
+    companion object CREATOR : Parcelable.Creator<Item4> {
+        override fun createFromParcel(parcel: Parcel): Item4 {
+            return Item4(parcel)
+        }
+
+        override fun newArray(size: Int): Array<Item4?> {
+            return arrayOfNulls(size)
+        }
+    }
+}
 class AddPlanViewModel(application: Application) : AndroidViewModel(application) {
     val itemsListData = MutableLiveData<ArrayList<Item4>>()
     val items = ArrayList<Item4>()
