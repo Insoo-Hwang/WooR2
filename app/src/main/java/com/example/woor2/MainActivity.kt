@@ -113,7 +113,6 @@ class MainActivity : AppCompatActivity() {
         val result  = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
         if(result != null){
             if(result.contents != null){
-                System.out.println(result.contents)
                 val intent = Intent(this, AddingPlanActivity::class.java)
                 intent.putExtra("code", result.contents.toString())
                 intent.putExtra("mode", 3)

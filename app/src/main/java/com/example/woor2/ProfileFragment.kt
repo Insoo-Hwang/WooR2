@@ -35,6 +35,14 @@ class ProfileFragment: Fragment() {
             )
         }
 
+        binding.CodeCheck.setOnClickListener {
+            val code = binding.CodeText.text.toString()
+            val intent = Intent(requireActivity(), AddingPlanActivity::class.java)
+            intent.putExtra("code", code)
+            intent.putExtra("mode", 3)
+            startActivity(intent)
+        }
+
         binding.QrCheck.setOnClickListener {
             startQR(requireView())
         }
