@@ -6,16 +6,6 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile Fragment"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/uidText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -40,7 +30,29 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="QR확인"
-        app:layout_constraintBottom_toTopOf="@+id/textView3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uidText" />
+
+    <Button
+        android:id="@+id/CodeCheck"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="코드확인"
+        app:layout_constraintBottom_toTopOf="@+id/QrCheck"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/CodeText"
+        app:layout_constraintTop_toBottomOf="@+id/uidText" />
+
+    <EditText
+        android:id="@+id/CodeText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="코드를 입력하세요"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/QrCheck"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uidText" />

@@ -76,11 +76,12 @@ class PlanFragment: Fragment() {
         val schedulesRef = db.collection("schedules")
         when(item.itemId){
             R.id.share->{
-                onDynamicLinkClick(requireActivity(),viewModel.items[viewModel.itemLongClick].id)
+                //onDynamicLinkClick(requireActivity(),viewModel.items[viewModel.itemLongClick].id)
+                share(viewModel.items[viewModel.itemLongClick].id)
             }
             R.id.shareQR -> {
                 val intent = Intent(requireActivity(), QrActivity::class.java)
-                intent.putExtra("key", viewModel.items[viewModel.itemLongClick].id.toString())
+                intent.putExtra("key", viewModel.items[viewModel.itemLongClick].id)
                 startActivity(intent)
             }
             R.id.delete -> {
@@ -93,7 +94,7 @@ class PlanFragment: Fragment() {
         return true
     }
 
-    private fun getDeepLink(key: String): Uri {
+    /*private fun getDeepLink(key: String): Uri {
         return Uri.parse("https://woorii.com/${key}")
     }
 
@@ -119,7 +120,18 @@ class PlanFragment: Fragment() {
                     }
                 }
             }
-    }
+    }*/
 
+    fun share(code : String) {
+        try {
+            val sendIntent = Intent()
+            sendIntent.action = Intent.ACTION_SEND
+            sendIntent.putExtra(Intent.EXTRA_TEXT, code)
+            sendIntent.type = "text/plain"
+            activity?.startActivity(Intent.createChooser(sendIntent, "Share"))
+        } catch (ignored: ActivityNotFoundException) {
+
+        }
+    }
 }
 
