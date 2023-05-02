@@ -26,7 +26,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 android:padding="16dp"
-                android:text="Hello World!"
+                android:text="제목1"
                 android:textSize="18sp" />
 
             <TextView
@@ -34,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
-                android:text="Bottom Text"
+                android:text="내용1"
                 android:textSize="18sp"
                 android:padding="16dp"/>
 
@@ -63,7 +63,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 android:padding="16dp"
-                android:text="Hello World!"
+                android:text="제목2"
                 android:textSize="18sp" />
 
             <TextView
@@ -71,7 +71,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
-                android:text="Bottom Text"
+                android:text="내용2"
                 android:textSize="18sp"
                 android:padding="16dp"/>
 
@@ -100,7 +100,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 android:padding="16dp"
-                android:text="Hello World!"
+                android:text="제목3"
                 android:textSize="18sp" />
 
             <TextView
@@ -108,7 +108,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
-                android:text="Bottom Text"
+                android:text="내용3"
                 android:textSize="18sp"
                 android:padding="16dp"/>
 
@@ -137,7 +137,7 @@
                 android:layout_marginBottom="16dp"
                 android:layout_weight="1"
                 android:padding="16dp"
-                android:text="Hello World!"
+                android:text="제목4"
                 android:textSize="18sp" />
 
             <TextView
@@ -145,7 +145,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="4"
-                android:text="Bottom Text"
+                android:text="내용4"
                 android:textSize="18sp"
                 android:padding="16dp"/>
 
