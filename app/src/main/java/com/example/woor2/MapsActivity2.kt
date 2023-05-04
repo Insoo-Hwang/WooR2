@@ -263,7 +263,17 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         val size = arrayList.size
 
         for (i in 0 until size) {
+            val num = i+1
             polyline.addPoint(MapPoint.mapPointWithGeoCoord(arrayList[i].latitude,arrayList[i].longitude))
+            val point = MapPOIItem()
+            point.apply {
+                itemName = "$num. " + arrayList[i].location
+                mapPoint = MapPoint.mapPointWithGeoCoord(arrayList[i].latitude,
+                    arrayList[i].longitude)
+                markerType = MapPOIItem.MarkerType.BluePin
+                selectedMarkerType = MapPOIItem.MarkerType.RedPin
+            }
+            mapView.addPOIItem(point)
         }
 
         mapView.addPolyline(polyline)
