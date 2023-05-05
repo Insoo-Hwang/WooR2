@@ -31,6 +31,10 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
+        binding.button2.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
+        }
+
     }
 
     private fun logIn(id: String, password: String) { // 로그인을 처리하는 함수

@@ -17,6 +17,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
+            android:name=".SignupActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".QrActivity"
             android:exported="false">
             <meta-data
@@ -30,7 +37,6 @@
         <meta-data
             android:name="android.app.lib_name"
             android:value="" />
-
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="826feb15fb92255731e2bde1d5d8a35b" />
@@ -65,7 +71,9 @@
                 <data
                     android:host="woorii.page.link"
                     android:scheme="http" />
-                <data android:host="action" android:scheme="kakaomap" />
+                <data
+                    android:host="action"
+                    android:scheme="kakaomap" />
             </intent-filter>
         </activity>
         <activity
@@ -80,9 +88,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.journeyapps.barcodescanner.CaptureActivity"
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="portrait"
-            tools:replace="screenOrientation"/>
+            tools:replace="screenOrientation" />
     </application>
 
 </manifest>
