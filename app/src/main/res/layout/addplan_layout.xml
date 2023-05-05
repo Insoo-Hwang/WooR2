@@ -8,18 +8,24 @@
     <ImageButton
         android:id="@+id/UpButton"
         android:layout_width="14sp"
-        android:layout_height="70sp"
+        android:layout_height="50dp"
         android:layout_weight="1"
-        android:background="@drawable/up"
-        android:backgroundTint="@color/A"/>
+        android:backgroundTint="@color/A"
+        app:srcCompat="@drawable/up"
+        android:scaleType="fitXY"
+        app:tint="@color/black"
+        android:elevation="4dp" />
 
     <ImageButton
         android:id="@+id/DownButton"
         android:layout_width="14sp"
-        android:layout_height="70sp"
+        android:layout_height="50dp"
         android:layout_weight="1"
-        android:background="@drawable/down"
-        android:backgroundTint="@color/A" />
+        android:backgroundTint="@color/A"
+        app:srcCompat="@drawable/down"
+        android:scaleType="fitXY"
+        app:tint="@color/black"
+        android:elevation="4dp" />
 
     <TextView
         android:id="@+id/LocationText"
@@ -29,20 +35,26 @@
         android:textAlignment="center"
         android:textSize="30sp" />
 
-    <Button
+    <ImageButton
         android:id="@+id/LocationButton"
         android:layout_width="14sp"
-        android:layout_height="60sp"
+        android:layout_height="50dp"
         android:layout_weight="1"
-        android:background="@drawable/route"
-        android:backgroundTint="@color/A" />
+        android:backgroundTint="@color/A"
+        app:srcCompat="@drawable/route"
+        android:scaleType="fitXY"
+        app:tint="@color/black"
+        android:elevation="4dp"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/DeleteButton"
         android:layout_width="14sp"
-        android:layout_height="60sp"
+        android:layout_height="50dp"
         android:layout_weight="1"
-        android:background="@drawable/delete"
-        android:backgroundTint="@color/A" />
+        android:backgroundTint="@color/A"
+        app:srcCompat="@drawable/delete"
+        android:scaleType="fitXY"
+        app:tint="@color/red"
+        android:elevation="4dp"/>
 
 </LinearLayout>

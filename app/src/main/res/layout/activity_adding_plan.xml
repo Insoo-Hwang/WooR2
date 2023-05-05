@@ -29,7 +29,8 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:backgroundTint="@color/A" />
 
     <EditText
         android:id="@+id/DateText"
@@ -43,31 +44,34 @@
         android:inputType="date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/NameText" />
+        app:layout_constraintTop_toBottomOf="@+id/NameText"
+        android:backgroundTint="@color/A"/>
 
     <Button
         android:id="@+id/PlanSaveButton"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/save"
         android:backgroundTint="@color/A"
+        android:text="저장하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/routeButton"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/AddPlanButton"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/addplan"
         android:backgroundTint="@color/A"
         app:layout_constraintBottom_toTopOf="@+id/PlanSaveButton"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/addplan"
+        android:scaleType="fitXY"
+        app:tint="@color/black"
+        android:elevation="4dp"/>
 
     <EditText
         android:id="@+id/LocationTextview"
@@ -80,22 +84,26 @@
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/PlanSaveButton"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/A"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/MapButton"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/A"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/PlanSaveButton"
         app:layout_constraintEnd_toStartOf="@+id/AddPlanButton"
         app:layout_constraintStart_toEndOf="@+id/LocationTextview"
         app:layout_constraintTop_toBottomOf="@+id/addplanrecycleView"
-        android:background="@drawable/maps"
-        android:backgroundTint="@color/A" />
+        app:srcCompat="@drawable/maps"
+        app:tint="@color/black"
+        android:elevation="4dp" />
 
     <CheckBox
         android:id="@+id/PublicCheck"
@@ -105,17 +113,21 @@
         android:layout_marginEnd="8dp"
         android:text="공개"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:buttonTint="@color/A"/>
 
-    <Button
+    <ImageButton
         android:id="@+id/routeButton"
-        android:layout_width="60dp"
-        android:layout_height="40dp"
+        android:layout_width="70dp"
+        android:layout_height="50dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@drawable/poly"
+        app:srcCompat="@drawable/poly"
+        android:scaleType="fitXY"
+        app:tint="@color/black"
         android:backgroundTint="@color/A"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:elevation="4dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
