@@ -2,10 +2,12 @@ package com.example.woor2
 
 import android.app.Activity
 import android.content.*
+import android.graphics.PorterDuff
 import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,6 +48,11 @@ class PlanFragment: Fragment() {
             intent.putExtra("mode", 0)
             startActivity(intent)
         }
+
+        val icon = context?.let { ContextCompat.getDrawable(it, R.drawable.plus) }
+        context?.let { ContextCompat.getColor(it, R.color.A) }
+            ?.let { icon?.setColorFilter(it, PorterDuff.Mode.SRC_ATOP) }
+        binding.plusButton.setImageDrawable(icon)
 
         binding.plusButton.setOnClickListener {
             val intent = Intent(activity, AddingPlanActivity::class.java)

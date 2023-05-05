@@ -21,6 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navi_menu"
-        android:theme="@style/Theme.Material3.Dark"/>
+        app:backgroundTint="@color/white"
+        app:itemIconTint="@color/gray" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,16 +8,18 @@
     <ImageButton
         android:id="@+id/UpButton"
         android:layout_width="14sp"
-        android:layout_height="match_parent"
+        android:layout_height="70sp"
         android:layout_weight="1"
-        app:srcCompat="@android:drawable/stat_sys_upload" />
+        android:background="@drawable/up"
+        android:backgroundTint="@color/A"/>
 
     <ImageButton
         android:id="@+id/DownButton"
         android:layout_width="14sp"
-        android:layout_height="match_parent"
+        android:layout_height="70sp"
         android:layout_weight="1"
-        app:srcCompat="@android:drawable/stat_sys_download" />
+        android:background="@drawable/down"
+        android:backgroundTint="@color/A" />
 
     <TextView
         android:id="@+id/LocationText"
@@ -29,16 +31,18 @@
 
     <Button
         android:id="@+id/LocationButton"
-        android:layout_width="16sp"
-        android:layout_height="match_parent"
+        android:layout_width="14sp"
+        android:layout_height="60sp"
         android:layout_weight="1"
-        android:text="경로" />
+        android:background="@drawable/route"
+        android:backgroundTint="@color/A" />
 
     <Button
         android:id="@+id/DeleteButton"
-        android:layout_width="16sp"
-        android:layout_height="match_parent"
+        android:layout_width="14sp"
+        android:layout_height="60sp"
         android:layout_weight="1"
-        android:text="삭제" />
+        android:background="@drawable/delete"
+        android:backgroundTint="@color/A" />
 
 </LinearLayout>
