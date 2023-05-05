@@ -62,4 +62,14 @@
         app:layout_constraintTop_toBottomOf="@+id/password"
         app:srcCompat="@drawable/line2" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="회원가입 하기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpTextView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
