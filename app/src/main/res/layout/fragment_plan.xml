@@ -26,7 +26,8 @@
         android:clickable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/plus"
+        app:backgroundTint="@color/white"/>
 
     <Button
         android:id="@+id/button"

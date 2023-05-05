@@ -3,18 +3,18 @@
 
     <item
         android:id="@+id/plan"
-        android:icon="@android:drawable/ic_dialog_map"
+        android:icon="@drawable/calendar"
         android:title="일정" />
     <item
         android:id="@+id/search"
-        android:icon="@android:drawable/ic_menu_search"
+        android:icon="@drawable/search"
         android:title="검색" />
     <item
         android:id="@+id/bulletinBoard"
-        android:icon="?attr/actionModePasteDrawable"
+        android:icon="@drawable/star"
         android:title="게시판" />
     <item
         android:id="@+id/profile"
-        android:icon="@android:drawable/ic_menu_myplaces"
+        android:icon="@drawable/dots"
         android:title="프로필" />
 </menu>

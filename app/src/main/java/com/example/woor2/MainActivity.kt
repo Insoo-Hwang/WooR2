@@ -1,10 +1,12 @@
 package com.example.woor2
 
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
@@ -36,6 +38,12 @@ class MainActivity : AppCompatActivity() {
                 R.id.bulletinBoard -> setFragment(TAG_BOARD, BulletinboardFragment())
                 R.id.profile ->setFragment(TAG_PROFILE, ProfileFragment())
             }
+
+            val colorStateList = ColorStateList(arrayOf(intArrayOf(android.R.attr.state_checked), intArrayOf()), intArrayOf(
+                ContextCompat.getColor(this@MainActivity, R.color.A), ContextCompat.getColor(this@MainActivity, R.color.gray)))
+            binding.navigationView.itemIconTintList = colorStateList
+            binding.navigationView.itemTextColor = colorStateList
+
             true
         }
 
