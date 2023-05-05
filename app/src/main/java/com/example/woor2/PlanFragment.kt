@@ -32,7 +32,7 @@ class PlanFragment: Fragment() {
     ): View {
         binding = FragmentPlanBinding.inflate(inflater, container, false)
         val recyclerView = binding.planrecycleView
-        adapter = PlanAdapter(viewModel)
+        adapter = PlanAdapter(viewModel, requireActivity())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
@@ -82,7 +82,7 @@ class PlanFragment: Fragment() {
         val db : FirebaseFirestore = Firebase.firestore
         val schedulesRef = db.collection("schedules")
         when(item.itemId){
-            R.id.share->{
+            /*R.id.share->{
                 //onDynamicLinkClick(requireActivity(),viewModel.items[viewModel.itemLongClick].id)
                 share(viewModel.items[viewModel.itemLongClick].id)
             }
@@ -90,7 +90,7 @@ class PlanFragment: Fragment() {
                 val intent = Intent(requireActivity(), QrActivity::class.java)
                 intent.putExtra("key", viewModel.items[viewModel.itemLongClick].id)
                 startActivity(intent)
-            }
+            }*/
             R.id.delete -> {
                 Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_LONG).show();
                 schedulesRef.document(viewModel.items[viewModel.itemLongClick].id).delete()
@@ -129,7 +129,7 @@ class PlanFragment: Fragment() {
             }
     }*/
 
-    fun share(code : String) {
+    /*fun share(code : String) {
         try {
             val sendIntent = Intent()
             sendIntent.action = Intent.ACTION_SEND
@@ -139,6 +139,6 @@ class PlanFragment: Fragment() {
         } catch (ignored: ActivityNotFoundException) {
 
         }
-    }
+    }*/
 }
 
