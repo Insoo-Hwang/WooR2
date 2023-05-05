@@ -54,7 +54,7 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
 
             binding.editTextSearch.visibility = View.INVISIBLE
 
-            binding.searchBtn.text = "닫기"
+            binding.searchBtn.setImageResource(R.drawable.close)
             binding.searchBtn.setOnClickListener {
                 finish()
             }
@@ -89,6 +89,7 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
                 }
             }
 
+            binding.searchBtn.setImageResource(R.drawable.search)
             binding.searchBtn.setOnClickListener {
                 val location =
                     getLocationFromAddress(
