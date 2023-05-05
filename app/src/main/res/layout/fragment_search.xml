@@ -14,7 +14,8 @@
         android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_search" />
+        app:srcCompat="@android:drawable/ic_menu_search"
+        android:backgroundTint="@color/white"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searchrecycleView"
@@ -36,6 +37,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/SearchingButton"
         app:layout_constraintEnd_toStartOf="@+id/SearchingButton"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/SearchingButton" />
+        app:layout_constraintTop_toTopOf="@+id/SearchingButton"
+        android:backgroundTint="@color/A"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
