@@ -12,7 +12,7 @@
     <item
         android:id="@+id/bulletinBoard"
         android:icon="@drawable/star"
-        android:title="게시판" />
+        android:title="추천" />
     <item
         android:id="@+id/profile"
         android:icon="@drawable/dots"
