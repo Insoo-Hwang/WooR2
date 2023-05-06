@@ -63,5 +63,17 @@
             android:textSize="17sp"
             android:background="@drawable/rounded_background"/>
 
+        <Button
+            android:id="@+id/deleteButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/delete"
+            android:backgroundTint="@color/red"
+            android:scaleType="fitXY"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
     </LinearLayout>
 </FrameLayout>

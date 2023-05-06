@@ -5,8 +5,12 @@ import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.woor2.databinding.PlanLayoutBinding
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class PlanAdapter(private val viewModel: PlanViewModel, private val activity: Activity) :RecyclerView.Adapter<PlanAdapter.ViewHolder>(){
     inner class ViewHolder(private val binding: PlanLayoutBinding) : RecyclerView.ViewHolder(binding.root){
@@ -21,6 +25,13 @@ class PlanAdapter(private val viewModel: PlanViewModel, private val activity: Ac
                 }
                 binding.shareButton.setOnClickListener {
                     share(viewModel.items[pos].id)
+                }
+                binding.deleteButton.setOnClickListener {
+                    val db : FirebaseFirestore = Firebase.firestore
+                    val schedulesRef = db.collection("schedules")
+                    Toast.makeText(activity, "삭제되었습니다.", Toast.LENGTH_LONG).show();
+                    schedulesRef.document(viewModel.items[pos].id).delete()
+                    viewModel.deleteItem(pos)
                 }
             }
             binding.root.setOnClickListener {

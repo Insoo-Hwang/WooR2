@@ -69,7 +69,7 @@ class PlanFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onCreateContextMenu(
+    /*override fun onCreateContextMenu(
         menu: ContextMenu,
         v: View,
         menuInfo: ContextMenu.ContextMenuInfo?
@@ -82,7 +82,7 @@ class PlanFragment: Fragment() {
         val db : FirebaseFirestore = Firebase.firestore
         val schedulesRef = db.collection("schedules")
         when(item.itemId){
-            /*R.id.share->{
+            R.id.share->{
                 //onDynamicLinkClick(requireActivity(),viewModel.items[viewModel.itemLongClick].id)
                 share(viewModel.items[viewModel.itemLongClick].id)
             }
@@ -90,7 +90,7 @@ class PlanFragment: Fragment() {
                 val intent = Intent(requireActivity(), QrActivity::class.java)
                 intent.putExtra("key", viewModel.items[viewModel.itemLongClick].id)
                 startActivity(intent)
-            }*/
+            }
             R.id.delete -> {
                 Toast.makeText(context, "삭제되었습니다.", Toast.LENGTH_LONG).show();
                 schedulesRef.document(viewModel.items[viewModel.itemLongClick].id).delete()
@@ -99,7 +99,7 @@ class PlanFragment: Fragment() {
             else -> return false
         }
         return true
-    }
+    }*/
 
     /*private fun getDeepLink(key: String): Uri {
         return Uri.parse("https://woorii.com/${key}")

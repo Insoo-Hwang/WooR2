@@ -49,9 +49,10 @@
 
     <Button
         android:id="@+id/PlanSaveButton"
-        android:layout_width="250dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/A"
         android:text="저장하기"
@@ -61,49 +62,47 @@
 
     <ImageButton
         android:id="@+id/AddPlanButton"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/A"
+        android:elevation="4dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/PlanSaveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/addplan"
-        android:scaleType="fitXY"
-        app:tint="@color/black"
-        android:elevation="4dp"/>
+        app:tint="@color/black" />
 
     <EditText
         android:id="@+id/LocationTextview"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/A"
         android:ems="10"
         android:hint="장소"
         android:inputType="textPersonName"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/PlanSaveButton"
-        app:layout_constraintStart_toStartOf="parent"
-        android:backgroundTint="@color/A"/>
+        app:layout_constraintEnd_toStartOf="@+id/MapButton"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageButton
         android:id="@+id/MapButton"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="@color/A"
+        android:elevation="4dp"
         android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/PlanSaveButton"
         app:layout_constraintEnd_toStartOf="@+id/AddPlanButton"
-        app:layout_constraintStart_toEndOf="@+id/LocationTextview"
         app:layout_constraintTop_toBottomOf="@+id/addplanrecycleView"
         app:srcCompat="@drawable/maps"
-        app:tint="@color/black"
-        android:elevation="4dp" />
+        app:tint="@color/black" />
 
     <CheckBox
         android:id="@+id/PublicCheck"
@@ -118,16 +117,15 @@
 
     <ImageButton
         android:id="@+id/routeButton"
-        android:layout_width="70dp"
+        android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        app:srcCompat="@drawable/poly"
-        android:scaleType="fitXY"
-        app:tint="@color/black"
         android:backgroundTint="@color/A"
+        android:elevation="4dp"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:elevation="4dp" />
+        app:srcCompat="@drawable/poly"
+        app:tint="@color/black" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
