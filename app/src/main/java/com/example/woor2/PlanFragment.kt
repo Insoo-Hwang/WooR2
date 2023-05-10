@@ -32,7 +32,7 @@ class PlanFragment: Fragment() {
     ): View {
         binding = FragmentPlanBinding.inflate(inflater, container, false)
         val recyclerView = binding.planrecycleView
-        adapter = PlanAdapter(viewModel)
+        adapter = PlanAdapter(viewModel, requireActivity())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
@@ -69,7 +69,7 @@ class PlanFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onCreateContextMenu(
+    /*override fun onCreateContextMenu(
         menu: ContextMenu,
         v: View,
         menuInfo: ContextMenu.ContextMenuInfo?
@@ -99,7 +99,7 @@ class PlanFragment: Fragment() {
             else -> return false
         }
         return true
-    }
+    }*/
 
     /*private fun getDeepLink(key: String): Uri {
         return Uri.parse("https://woorii.com/${key}")
@@ -129,7 +129,7 @@ class PlanFragment: Fragment() {
             }
     }*/
 
-    fun share(code : String) {
+    /*fun share(code : String) {
         try {
             val sendIntent = Intent()
             sendIntent.action = Intent.ACTION_SEND
@@ -139,6 +139,6 @@ class PlanFragment: Fragment() {
         } catch (ignored: ActivityNotFoundException) {
 
         }
-    }
+    }*/
 }
 

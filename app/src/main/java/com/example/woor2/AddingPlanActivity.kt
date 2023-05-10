@@ -51,7 +51,8 @@ class AddingPlanActivity: AppCompatActivity() {
             db.collection("schedules").document(code.toString()).get().addOnSuccessListener {
                 copy = it["copy"] as Boolean
                 binding.NameText.setText(it["title"].toString())
-                binding.DateText.setText(it["date"].toString())
+                if(mode < 2)
+                    binding.DateText.setText(it["date"].toString())
                 if(mode == 2 || mode == 3 || copy) {
                     binding.PublicCheck.isEnabled = false
                     binding.PublicCheck.isChecked = false

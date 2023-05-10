@@ -4,119 +4,171 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:layout_marginTop="30dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_1"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp">
-
-        <LinearLayout
+        android:layout_height="80dp"
+        android:padding = "5dp"
+        android:background="@color/A">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp">
 
-            <TextView
-                android:id="@+id/text_view_1"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="23dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:text="제목1"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/AButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/restaurant"
+                    android:backgroundTint="@color/black"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:id="@+id/text_view_5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4"
-                android:text="내용1"
-                android:textSize="18sp"
-                android:padding="16dp"/>
+                <TextView
+                    android:id="@+id/text_view_1"
+                    android:layout_width="23dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="16dp"
+                    android:text="한성대"
+                    android:textSize="18sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/text_view_2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="한성대 근처 맛집을 찾아보세요!"
+                    android:textSize="13sp"
+                    android:padding="16dp"/>
+
+            </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_2"
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp">
-
-        <LinearLayout
+        android:layout_height="80dp"
+        android:padding = "5dp"
+        android:background="@color/A">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp">
 
-            <TextView
-                android:id="@+id/text_view_2"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="23dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:text="제목2"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/BButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/coffee"
+                    android:backgroundTint="@color/black"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:id="@+id/text_view_6"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4"
-                android:text="내용2"
-                android:textSize="18sp"
-                android:padding="16dp"/>
+                <TextView
+                    android:id="@+id/text_view_3"
+                    android:layout_width="23dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="16dp"
+                    android:text="성수동"
+                    android:textSize="18sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/text_view_4"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:text="서울숲을 바라보며 즐기는 커피 한잔의 여유"
+                    android:textSize="13sp"
+                    android:padding="16dp"/>
+
+            </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card_view_3"
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        app:cardCornerRadius="4dp"
-        app:cardElevation="4dp">
-
-        <LinearLayout
+        android:layout_height="80dp"
+        android:padding = "5dp"
+        android:background="@color/A">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:layout_weight="1"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp">
 
-            <TextView
-                android:id="@+id/text_view_3"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="23dp"
-                android:layout_marginBottom="16dp"
-                android:layout_weight="1"
-                android:padding="16dp"
-                android:text="제목3"
-                android:textSize="18sp" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/CButton"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginStart="10dp"
+                    android:background="@drawable/puzzle"
+                    android:backgroundTint="@color/black"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
 
-            <TextView
-                android:id="@+id/text_view_7"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4"
-                android:text="내용3"
-                android:textSize="18sp"
-                android:padding="16dp"/>
+                <TextView
+                    android:id="@+id/text_view_5"
+                    android:layout_width="23dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:padding="16dp"
+                    android:text="홍대 입구"
+                    android:textSize="18sp" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/text_view_6"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:padding="16dp"
+                    android:text="평소에 접하지 못했던 이색 체험을 즐겨보세요"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
 
 
-    </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
+    </FrameLayout>
 
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:padding = "5dp"
+        android:background="@color/A">
     <androidx.cardview.widget.CardView
         android:id="@+id/card_view_4"
         android:layout_width="match_parent"
@@ -128,30 +180,41 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/qrButton"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/worldwide"
+                android:backgroundTint="@color/black"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
-                android:id="@+id/text_view_4"
-                android:layout_width="match_parent"
-                android:layout_height="23dp"
-                android:layout_marginBottom="16dp"
+                android:id="@+id/text_view_7"
+                android:layout_width="23dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:padding="16dp"
-                android:text="제목4"
+                android:text="이태원"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/text_view_8"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4"
-                android:text="내용4"
-                android:textSize="18sp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:text="'작은 지구촌' 이태원을 즐겨보세요"
+                android:textSize="13sp"
                 android:padding="16dp"/>
 
         </LinearLayout>
 
 
     </androidx.cardview.widget.CardView>
+    </FrameLayout>
 
 </LinearLayout>

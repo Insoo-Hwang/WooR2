@@ -2,7 +2,7 @@
 <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding = "8dp"
+    android:padding = "5dp"
     android:background="@color/A"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
@@ -44,25 +44,25 @@
 
     <ImageButton
         android:id="@+id/LocationButton"
-        android:layout_width="14sp"
+        android:layout_width="17sp"
         android:layout_height="50dp"
         android:layout_weight="1"
         android:backgroundTint="@color/A"
-        app:srcCompat="@drawable/route"
+        android:elevation="4dp"
         android:scaleType="fitXY"
-        app:tint="@color/black"
-        android:elevation="4dp"/>
+        app:srcCompat="@drawable/route"
+        app:tint="@color/black" />
 
     <ImageButton
         android:id="@+id/DeleteButton"
-        android:layout_width="14sp"
+        android:layout_width="17sp"
         android:layout_height="50dp"
         android:layout_weight="1"
         android:backgroundTint="@color/A"
-        app:srcCompat="@drawable/delete"
+        android:elevation="4dp"
         android:scaleType="fitXY"
-        app:tint="@color/red"
-        android:elevation="4dp"/>
+        app:srcCompat="@drawable/delete"
+        app:tint="@color/red" />
 
 </LinearLayout>
 </FrameLayout>
