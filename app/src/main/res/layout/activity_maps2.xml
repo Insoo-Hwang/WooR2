@@ -34,28 +34,26 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="16dp"
+        android:backgroundTint="@color/A"
         android:ems="10"
         android:hint="주소 입력"
         android:inputType="textPersonName"
         android:minHeight="48dp"
         android:textColorHint="#546E7A"
-        app:layout_constraintEnd_toStartOf="@+id/searchBtn"
-        app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/A"/>
+        app:layout_constraintEnd_toStartOf="@+id/searchFAB"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/searchBtn"
-        android:layout_width="60dp"
-        android:layout_height="50dp"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/searchFAB"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="@color/A"
-        android:scaleType="fitXY"
+        android:clickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/search"
-        app:tint="@color/black"
-        android:elevation="4dp"/>
+        android:backgroundTint="@color/white" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

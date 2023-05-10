@@ -3,6 +3,7 @@ package com.example.woor2
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.PorterDuff
 import android.location.Address
 import android.location.Geocoder
 import android.location.Location
@@ -16,6 +17,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.woor2.databinding.ActivityMaps2Binding
 import com.google.android.gms.maps.model.LatLng
 import net.daum.mf.map.api.*
@@ -54,8 +56,11 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
 
             binding.editTextSearch.visibility = View.INVISIBLE
 
-            binding.searchBtn.setImageResource(R.drawable.close)
-            binding.searchBtn.setOnClickListener {
+            val icon = ContextCompat.getDrawable(this, R.drawable.close)
+            icon?.setColorFilter(ContextCompat.getColor(this, R.color.A), PorterDuff.Mode.SRC_ATOP)
+            binding.searchFAB.setImageDrawable(icon)
+
+            binding.searchFAB.setOnClickListener {
                 finish()
             }
         }
@@ -89,8 +94,11 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
                 }
             }
 
-            binding.searchBtn.setImageResource(R.drawable.search)
-            binding.searchBtn.setOnClickListener {
+            val icon = ContextCompat.getDrawable(this, R.drawable.search)
+            icon?.setColorFilter(ContextCompat.getColor(this, R.color.A), PorterDuff.Mode.SRC_ATOP)
+            binding.searchFAB.setImageDrawable(icon)
+
+            binding.searchFAB.setOnClickListener {
                 val location =
                     getLocationFromAddress(
                         applicationContext,

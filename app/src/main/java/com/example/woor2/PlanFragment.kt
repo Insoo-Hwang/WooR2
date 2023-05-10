@@ -1,12 +1,9 @@
 package com.example.woor2
 
-import android.app.Activity
 import android.content.*
 import android.graphics.PorterDuff
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels

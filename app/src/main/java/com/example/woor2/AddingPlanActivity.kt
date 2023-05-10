@@ -3,7 +3,6 @@ package com.example.woor2
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -29,6 +28,7 @@ class AddingPlanActivity: AppCompatActivity() {
     private val PERMISSION_REQUEST_ACCESS_COARSE_LOCATION = 1
     private var mLocationPermissionGranted = false
     private var mLocationPermissionGranted2 = false
+    private lateinit var dialog: CustomDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,6 +71,9 @@ class AddingPlanActivity: AppCompatActivity() {
         viewModel.itemsListData.observe(this){
             adapter.notifyDataSetChanged()
         }
+
+        dialog = CustomDialog(this)
+
         binding.AddPlanButton.setOnClickListener {
             if(binding.LocationTextview.text.toString() == ""){
                 Toast.makeText(this, "장소를 입력해주세요.", Toast.LENGTH_SHORT).show()
@@ -150,7 +153,13 @@ class AddingPlanActivity: AppCompatActivity() {
         if (mode == 3) {
             finishAffinity() // 앱 종료
         } else {
-            super.onBackPressed() // 기본 뒤로가기 동작 수행
+            dialog.myDig()
+            dialog.setOnClickListener(object : CustomDialog.ButtonClickListener {
+                override fun onClicked() {
+                    finish()
+                }
+            })
+            //super.onBackPressed() // 기본 뒤로가기 동작 수행
         }
     }
 
@@ -193,10 +202,6 @@ class AddingPlanActivity: AppCompatActivity() {
                 PERMISSION_REQUEST_ACCESS_COARSE_LOCATION
             )
         }
-    }
-
-    fun getSharedViewModel(): AddPlanViewModel {
-        return viewModel
     }
 }
 
