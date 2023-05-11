@@ -13,7 +13,9 @@
         android:layout_marginEnd="24dp"
         android:text="TextView"
         app:layout_constraintEnd_toStartOf="@+id/logoutButton"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/logoutButton"
@@ -24,7 +26,9 @@
         android:text="로그아웃"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:backgroundTint="@color/A"/>
+        android:backgroundTint="@color/A"
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/QrCheck"
@@ -35,7 +39,9 @@
         android:backgroundTint="@color/A"
         android:text="QR확인"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/CodeCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/CodeCheck"
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/CodeCheck"
@@ -46,7 +52,9 @@
         android:backgroundTint="@color/A"
         android:text="코드확인"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logoutButton" />
+        app:layout_constraintTop_toBottomOf="@+id/logoutButton"
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 
     <EditText
         android:id="@+id/CodeText"
@@ -59,7 +67,9 @@
         android:inputType="textPersonName"
         android:minHeight="48dp"
         app:layout_constraintEnd_toStartOf="@+id/CodeCheck"
-        app:layout_constraintTop_toBottomOf="@+id/uidText" />
+        app:layout_constraintTop_toBottomOf="@+id/uidText"
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 
     <Button
         android:id="@+id/locationBtn"
@@ -70,5 +80,7 @@
         android:backgroundTint="@color/A"
         android:text="위치"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/QrCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/QrCheck"
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

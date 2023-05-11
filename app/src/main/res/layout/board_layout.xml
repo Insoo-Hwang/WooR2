@@ -12,7 +12,9 @@
         android:height="200px"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="30sp" />
+        android:textSize="30sp"
+        android:fontFamily="@font/omu1"
+        />
 
     <TextView
         android:id="@+id/BoardWriter"
@@ -22,6 +24,7 @@
         android:height="200px"
         android:text="TextView"
         android:textAlignment="center"
+        android:fontFamily="@font/omu1"
         android:textSize="30sp" />
 
 </LinearLayout>
