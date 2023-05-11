@@ -43,7 +43,8 @@
                     android:layout_weight="1"
                     android:padding="16dp"
                     android:text="한성대"
-                    android:textSize="18sp" />
+                    android:fontFamily="@font/omu1"
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/text_view_2"
@@ -51,7 +52,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:text="한성대 근처 맛집을 찾아보세요!"
-                    android:textSize="13sp"
+                    android:fontFamily="@font/omu1"
+                    android:textSize="18sp"
                     android:padding="16dp"/>
 
             </LinearLayout>
@@ -95,7 +97,8 @@
                     android:layout_weight="1"
                     android:padding="16dp"
                     android:text="성수동"
-                    android:textSize="18sp" />
+                    android:fontFamily="@font/omu1"
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/text_view_4"
@@ -103,7 +106,8 @@
                     android:layout_height="match_parent"
                     android:layout_weight="2"
                     android:text="서울숲을 바라보며 즐기는 커피 한잔의 여유"
-                    android:textSize="13sp"
+                    android:fontFamily="@font/omu1"
+                    android:textSize="18sp"
                     android:padding="16dp"/>
 
             </LinearLayout>
@@ -147,7 +151,8 @@
                     android:layout_weight="1"
                     android:padding="16dp"
                     android:text="홍대 입구"
-                    android:textSize="18sp" />
+                    android:fontFamily="@font/omu1"
+                    android:textSize="24sp" />
 
                 <TextView
                     android:id="@+id/text_view_6"
@@ -156,7 +161,8 @@
                     android:layout_weight="2"
                     android:padding="16dp"
                     android:text="평소에 접하지 못했던 이색 체험을 즐겨보세요"
-                    android:textSize="13sp" />
+                    android:fontFamily="@font/omu1"
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
@@ -200,7 +206,8 @@
                 android:layout_weight="1"
                 android:padding="16dp"
                 android:text="이태원"
-                android:textSize="18sp" />
+                android:fontFamily="@font/omu1"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/text_view_8"
@@ -208,7 +215,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="2"
                 android:text="'작은 지구촌' 이태원을 즐겨보세요"
-                android:textSize="13sp"
+                android:fontFamily="@font/omu1"
+                android:textSize="18sp"
                 android:padding="16dp"/>
 
         </LinearLayout>

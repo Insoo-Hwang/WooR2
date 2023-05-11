@@ -13,7 +13,9 @@
         android:text="CANCEL"
         app:layout_constraintBaseline_toBaselineOf="@+id/buttonOk"
         app:layout_constraintEnd_toStartOf="@+id/buttonOk"
-        android:backgroundTint="@color/A"/>
+        android:backgroundTint="@color/red"
+        android:fontFamily="@font/omu1"
+        android:textSize="18sp"/>
 
     <Button
         android:id="@+id/buttonOk"
@@ -24,7 +26,9 @@
         android:text="OK"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
-        android:backgroundTint="@color/A"/>
+        android:backgroundTint="@color/A"
+        android:fontFamily="@font/omu1"
+        android:textSize="18sp"/>
 
     <TextView
         android:id="@+id/textView6"
@@ -32,10 +36,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="작성 중인 내용을 취소하고 돌아가시겠습니까?"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/omu1"/>
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

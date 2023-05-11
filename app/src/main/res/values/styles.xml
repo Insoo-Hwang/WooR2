@@ -7,7 +7,13 @@
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginRight">20dp</item>
     </style>
-    <style name="omu" parent="">
-        <item name="android:fontFamily">@fonts/오뮤_다예쁨체</item>
+    <style name="omu">
+        <item name="android:fontFamily">@font/omu</item>
+    </style>
+    --- themes.xml
+    <!-- Base application theme. -->
+    <style name="Widget.MaterialComponents.TextView." parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="android:textViewStyle">@style/omu</item> <!-- android:textViewStyle을 새로만든 MyTextViewStyle로 덮어씌움 -->
     </style>
 </resources>

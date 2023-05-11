@@ -39,8 +39,9 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:textAlignment="center"
-        android:textSize="15sp"
-        android:gravity="center_vertical"/>
+        android:gravity="center_vertical"
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 
     <ImageButton
         android:id="@+id/LocationButton"

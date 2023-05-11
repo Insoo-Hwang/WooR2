@@ -33,8 +33,9 @@
         android:elegantTextHeight="false"
         android:text="TextView"
         android:textAlignment="center"
-        android:textSize="20sp"
-        android:gravity="center_vertical"/>
+        android:gravity="center_vertical"
+        android:fontFamily="@font/omu1"
+        android:textSize="20sp"/>
 
 </LinearLayout>
 </FrameLayout>
