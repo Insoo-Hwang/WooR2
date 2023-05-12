@@ -45,19 +45,18 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         val e = intent.extras?:return
         val mode = e.getInt("mode")
 
+        binding = ActivityMaps2Binding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        mapView = MapView(this)
+        val mapViewContainer = binding.mapView as ViewGroup
+        mapViewContainer.addView(mapView)
+
         if (mode == 1) {
             val array = e.getSerializable("array")
 
-            binding = ActivityMaps2Binding.inflate(layoutInflater)
-            setContentView(binding.root)
-
-            mapView = MapView(this)
-            val mapViewContainer = binding.mapView as ViewGroup
-            mapViewContainer.addView(mapView)
-
-            drawPolyLine(array as ArrayList<Item4>)
-
             binding.editTextSearch.visibility = View.INVISIBLE
+            binding.currentLocationFAB.visibility = View.INVISIBLE
 
             val icon = ContextCompat.getDrawable(this, R.drawable.close)
             icon?.setColorFilter(ContextCompat.getColor(this, R.color.A), PorterDuff.Mode.SRC_ATOP)
@@ -66,6 +65,8 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
             binding.searchFAB.setOnClickListener {
                 finish()
             }
+
+            drawPolyLine(array as ArrayList<Item4>)
         }
         if (mode == 2) {
             val loc1 = e.getString("loc1")
@@ -76,14 +77,8 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
             val lon2 = e.getDouble("lon2")
             val distance = e.getDouble("distance") / 2.0
 
-            binding = ActivityMaps2Binding.inflate(layoutInflater)
-            setContentView(binding.root)
-
-            mapView = MapView(this)
-            val mapViewContainer = binding.mapView as ViewGroup
-            mapViewContainer.addView(mapView)
-
             binding.editTextSearch.visibility = View.INVISIBLE
+            binding.currentLocationFAB.visibility = View.INVISIBLE
 
             val icon = ContextCompat.getDrawable(this, R.drawable.close)
             icon?.setColorFilter(ContextCompat.getColor(this, R.color.A), PorterDuff.Mode.SRC_ATOP)
@@ -97,16 +92,9 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
                 drawCircle(loc1, lat1, lon1, loc2,  lat2, lon2, distance)
             }
         }
-        else {
-            binding = ActivityMaps2Binding.inflate(layoutInflater)
-            setContentView(binding.root)
-
-            mapView = MapView(this)
+        if (mode ==3) {
             mapView.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))  // 커스텀 말풍선 등록
             mapView.setPOIItemEventListener(this)  // 마커 클릭 이벤트 리스너 등록
-
-            val mapViewContainer = binding.mapView as ViewGroup
-            mapViewContainer.addView(mapView)
 
             var latitude = 0.0
             var longitude = 0.0
