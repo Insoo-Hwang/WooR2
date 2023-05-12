@@ -3,6 +3,7 @@ package com.example.woor2
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.graphics.PorterDuff
 import android.location.Address
 import android.location.Geocoder
@@ -27,6 +28,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+
 class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
 
     private lateinit var mapView:MapView
@@ -41,10 +43,11 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         super.onCreate(savedInstanceState)
 
         val e = intent.extras?:return
-        val array = e.getSerializable("array")
-        val mode = e.getBoolean("mode")
+        val mode = e.getInt("mode")
 
-        if (mode) {
+        if (mode == 1) {
+            val array = e.getSerializable("array")
+
             binding = ActivityMaps2Binding.inflate(layoutInflater)
             setContentView(binding.root)
 
@@ -62,6 +65,36 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
 
             binding.searchFAB.setOnClickListener {
                 finish()
+            }
+        }
+        if (mode == 2) {
+            val loc1 = e.getString("loc1")
+            val lat1 = e.getDouble("lat1")
+            val lon1 = e.getDouble("lon1")
+            val loc2 = e.getString("loc2")
+            val lat2 = e.getDouble("lat2")
+            val lon2 = e.getDouble("lon2")
+            val distance = e.getDouble("distance") / 2.0
+
+            binding = ActivityMaps2Binding.inflate(layoutInflater)
+            setContentView(binding.root)
+
+            mapView = MapView(this)
+            val mapViewContainer = binding.mapView as ViewGroup
+            mapViewContainer.addView(mapView)
+
+            binding.editTextSearch.visibility = View.INVISIBLE
+
+            val icon = ContextCompat.getDrawable(this, R.drawable.close)
+            icon?.setColorFilter(ContextCompat.getColor(this, R.color.A), PorterDuff.Mode.SRC_ATOP)
+            binding.searchFAB.setImageDrawable(icon)
+
+            binding.searchFAB.setOnClickListener {
+                finish()
+            }
+
+            if (loc1 != null && loc2 != null) {
+                drawCircle(loc1, lat1, lon1, loc2,  lat2, lon2, distance)
             }
         }
         else {
@@ -288,6 +321,53 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         mapView.addPolyline(polyline)
         val mapPointBounds = MapPointBounds(polyline.mapPoints)
         val padding = 100 // px
+        mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, padding))
+    }
+
+    private fun drawCircle(loc1:String, lat1:Double, lon1:Double,loc2:String, lat2:Double, lon2:Double, radius:Double) {
+        val circle1 = MapCircle(
+            MapPoint.mapPointWithGeoCoord(lat1, lon1),  // center
+            radius.toInt(),  // radius
+            Color.argb(128, 255, 0, 0),  // strokeColor
+            Color.argb(128, 0, 255, 0) // fillColor
+        )
+        circle1.tag = 1234
+        mapView.addCircle(circle1)
+
+        val point1 = MapPOIItem()
+        point1.apply {
+            itemName = loc1
+            mapPoint = MapPoint.mapPointWithGeoCoord(lat1,
+                lon1)
+            markerType = MapPOIItem.MarkerType.BluePin
+            selectedMarkerType = MapPOIItem.MarkerType.RedPin
+        }
+        mapView.addPOIItem(point1)
+
+        val circle2 = MapCircle(
+            MapPoint.mapPointWithGeoCoord(lat2, lon2),  // center
+            radius.toInt(),  // radius
+            Color.argb(128, 255, 0, 0),  // strokeColor
+            Color.argb(128, 255, 255, 0) // fillColor
+        )
+        circle2.tag = 5678
+        mapView.addCircle(circle2)
+
+        val point2 = MapPOIItem()
+        point2.apply {
+            itemName = loc2
+            mapPoint = MapPoint.mapPointWithGeoCoord(lat2,
+                lon2)
+            markerType = MapPOIItem.MarkerType.BluePin
+            selectedMarkerType = MapPOIItem.MarkerType.RedPin
+        }
+        mapView.addPOIItem(point2)
+
+        // 지도뷰의 중심좌표와 줌레벨을 Circle이 모두 나오도록 조정.
+        val mapPointBoundsArray = arrayOf(circle1.bound, circle2.bound)
+        val mapPointBounds = MapPointBounds(mapPointBoundsArray)
+        val padding = 50 // px
+
         mapView.moveCamera(CameraUpdateFactory.newMapPointBounds(mapPointBounds, padding))
     }
 }
