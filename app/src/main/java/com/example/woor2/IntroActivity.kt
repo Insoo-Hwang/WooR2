@@ -17,16 +17,16 @@ class IntroActivity: AppCompatActivity() {
         val binding = ActivityIntroBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        /*ObjectAnimator.ofFloat(binding.textView4, "scaleX", 1f, 1.4f).apply { //X 방향 효과
+        ObjectAnimator.ofFloat(binding.imageView3, "scaleX", 1f, 1.4f).apply { //X 방향 효과
             duration = 500
             interpolator = AccelerateInterpolator()
             start()
         }
-        ObjectAnimator.ofFloat(binding.textView4, "scaleY", 1f, 1.4f).apply { //Y 방향 효과
+        ObjectAnimator.ofFloat(binding.imageView3, "scaleY", 1f, 1.4f).apply { //Y 방향 효과
             duration = 500
             interpolator = AccelerateInterpolator()
             start()
-        }*/
+        }
 
         Timer().schedule(700) { //0.7초 후 로그인 액티비티로 전환
             if (Firebase.auth.currentUser == null) {
