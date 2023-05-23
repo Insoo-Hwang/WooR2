@@ -90,6 +90,16 @@ class ProfileFragment: Fragment() {
             intent.putExtra("distance", distance)
             startActivityForResult(intent, 2)
         }
+
+        /*
+        binding.middleLocationButton.setOnClickListener {
+            val intent = Intent(context, MapsActivity2::class.java)
+            intent.putExtra("mode", 4)
+            intent.putExtra("lat", (latitude1+latitude2)/2.0)
+            intent.putExtra("lon", (longitude1+longitude2)/2.0)
+            startActivityForResult(intent, 2)
+           }
+         */
     }
 
     fun startQR(view : View){

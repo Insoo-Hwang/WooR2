@@ -91,6 +91,19 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
             if (loc1 != null && loc2 != null) {
                 drawCircle(loc1, lat1, lon1, loc2,  lat2, lon2, distance)
             }
+
+            val lat = (lat1+lat2)/2.0
+            val lon = (lon1+lon2)/2.0
+
+            // 지도에 마커 추가
+            val point = MapPOIItem()
+            point.apply {
+                itemName = "중간 지점"
+                mapPoint = MapPoint.mapPointWithGeoCoord(lat, lon)
+                markerType = MapPOIItem.MarkerType.BluePin
+                selectedMarkerType = MapPOIItem.MarkerType.RedPin
+            }
+            mapView.addPOIItem(point)
         }
         if (mode ==3) {
             mapView.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))  // 커스텀 말풍선 등록
@@ -148,6 +161,39 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
         }
          */
         }
+        /* 중간 지점 주변 정보
+        if (mode == 4) {
+            mapView.setCalloutBalloonAdapter(CustomBalloonAdapter(layoutInflater))  // 커스텀 말풍선 등록
+            mapView.setPOIItemEventListener(this)  // 마커 클릭 이벤트 리스너 등록
+
+            val lat = e.getDouble("lat")
+            val lon = e.getDouble("lon")
+
+            binding.editTextSearch.visibility = View.INVISIBLE
+            binding.currentLocationFAB.visibility = View.INVISIBLE
+
+            val icon = ContextCompat.getDrawable(this, R.drawable.close)
+            icon?.setColorFilter(ContextCompat.getColor(this, R.color.A), PorterDuff.Mode.SRC_ATOP)
+            binding.searchFAB.setImageDrawable(icon)
+
+            binding.searchFAB.setOnClickListener {
+                finish()
+            }
+
+            showCurrentLocation2(lat, lon)
+            // 지도에 마커 추가
+            val point = MapPOIItem()
+            point.apply {
+                itemName = "중간 지점"
+                mapPoint = MapPoint.mapPointWithGeoCoord(lat, lon)
+                markerType = MapPOIItem.MarkerType.BluePin
+                selectedMarkerType = MapPOIItem.MarkerType.RedPin
+            }
+            mapView.addPOIItem(point)
+
+            searchKeyword("")
+        }
+         */
     }
 
     private fun getLocationFromAddress(context: Context, address: String): Location? {
@@ -170,6 +216,17 @@ class MapsActivity2: AppCompatActivity(), MapView.POIItemEventListener {
 
     private fun showCurrentLocation(location: Location) {
         val curPoint = LatLng(location.latitude, location.longitude)
+
+        mapView.setMapCenterPoint(
+            MapPoint.mapPointWithGeoCoord(
+                curPoint.latitude,
+                curPoint.longitude
+            ), true
+        )
+    }
+
+    private fun showCurrentLocation2(latitude: Double, longitude: Double) {
+        val curPoint = LatLng(latitude, longitude)
 
         mapView.setMapCenterPoint(
             MapPoint.mapPointWithGeoCoord(
