@@ -151,7 +151,7 @@ class AddingPlanActivity: AppCompatActivity() {
 
     override fun onBackPressed() {
         if (mode == 3) {
-            finishAffinity() // 앱 종료
+            super.onBackPressed()
         } else {
             dialog.myDig()
             dialog.setOnClickListener(object : CustomDialog.ButtonClickListener {
