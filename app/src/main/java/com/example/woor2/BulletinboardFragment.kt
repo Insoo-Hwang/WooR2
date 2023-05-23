@@ -23,6 +23,34 @@ class BulletinboardFragment: Fragment() {
     ): View {
         val binding = FragmentBullentinBoardBinding.inflate(inflater, container, false)
 
+        binding.cardView1.setOnClickListener{
+            val intent = Intent(requireActivity(), AddingPlanActivity::class.java)
+            intent.putExtra("code", "b81B03OmMDmRhK1Nim2a")
+            intent.putExtra("mode", 3)
+            startActivity(intent)
+        }
+
+        binding.cardView2.setOnClickListener{
+            val intent = Intent(requireActivity(), AddingPlanActivity::class.java)
+            intent.putExtra("code", "gXzD4sGm1VAhJJkugZMY")
+            intent.putExtra("mode", 3)
+            startActivity(intent)
+        }
+
+        binding.cardView3.setOnClickListener{
+            val intent = Intent(requireActivity(), AddingPlanActivity::class.java)
+            intent.putExtra("code", "mOyATlMW0s9H5o7TCCLm")
+            intent.putExtra("mode", 3)
+            startActivity(intent)
+        }
+
+        binding.cardView4.setOnClickListener{
+            val intent = Intent(requireActivity(), AddingPlanActivity::class.java)
+            intent.putExtra("code", "P75Vj6PdX0DhPjyZkI5J")
+            intent.putExtra("mode", 3)
+            startActivity(intent)
+        }
+
         return binding.root
     }
 
