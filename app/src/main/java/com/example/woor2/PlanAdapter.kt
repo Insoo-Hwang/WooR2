@@ -2,6 +2,7 @@ package com.example.woor2
 
 import android.app.Activity
 import android.content.ActivityNotFoundException
+import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,8 +13,10 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class PlanAdapter(private val viewModel: PlanViewModel, private val activity: Activity) :RecyclerView.Adapter<PlanAdapter.ViewHolder>(){
+class PlanAdapter(private val viewModel: PlanViewModel, private val activity: Activity, private val context: Context) :RecyclerView.Adapter<PlanAdapter.ViewHolder>(){
     inner class ViewHolder(private val binding: PlanLayoutBinding) : RecyclerView.ViewHolder(binding.root){
+        private lateinit var dialog: CustomDialog
+
         fun setContents(pos: Int){
             with(viewModel.items[pos]){
                 binding.PlanTitle.text = title
@@ -26,12 +29,21 @@ class PlanAdapter(private val viewModel: PlanViewModel, private val activity: Ac
                 binding.shareButton.setOnClickListener {
                     share(viewModel.items[pos].id)
                 }
+
+                dialog = CustomDialog(context)
+
                 binding.deleteButton.setOnClickListener {
-                    val db : FirebaseFirestore = Firebase.firestore
-                    val schedulesRef = db.collection("schedules")
-                    Toast.makeText(activity, "삭제되었습니다.", Toast.LENGTH_LONG).show();
-                    schedulesRef.document(viewModel.items[pos].id).delete()
-                    viewModel.deleteItem(pos)
+                    dialog.myDig()
+                    dialog.changeText("이 일정을 삭제하시겠습니까?")
+                    dialog.setOnClickListener(object : CustomDialog.ButtonClickListener {
+                        override fun onClicked() {
+                            val db : FirebaseFirestore = Firebase.firestore
+                            val schedulesRef = db.collection("schedules")
+                            Toast.makeText(activity, "삭제되었습니다.", Toast.LENGTH_LONG).show();
+                            schedulesRef.document(viewModel.items[pos].id).delete()
+                            viewModel.deleteItem(pos)
+                        }
+                    })
                 }
             }
             binding.root.setOnClickListener {
@@ -47,6 +59,8 @@ class PlanAdapter(private val viewModel: PlanViewModel, private val activity: Ac
         val layoutInflater = LayoutInflater.from(parent.context)
         val binding = PlanLayoutBinding.inflate(layoutInflater, parent, false)
         return ViewHolder(binding)
+
+
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
