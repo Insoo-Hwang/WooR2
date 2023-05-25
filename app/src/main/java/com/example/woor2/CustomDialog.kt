@@ -4,6 +4,7 @@ import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
 import android.widget.Button
+import android.widget.TextView
 
 class CustomDialog(context: Context) {
         private val dialog = Dialog(context)
@@ -39,5 +40,10 @@ class CustomDialog(context: Context) {
 
     fun setOnClickListener(listener: ButtonClickListener) {
         onClickListener = listener
+    }
+
+    fun changeText(text: String) {
+        val textView = dialog.findViewById<TextView>(R.id.textView6)
+        textView.text = text
     }
 }

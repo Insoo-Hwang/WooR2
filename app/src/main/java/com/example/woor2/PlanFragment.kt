@@ -29,7 +29,7 @@ class PlanFragment: Fragment() {
     ): View {
         binding = FragmentPlanBinding.inflate(inflater, container, false)
         val recyclerView = binding.planrecycleView
-        adapter = PlanAdapter(viewModel, requireActivity())
+        adapter = context?.let { PlanAdapter(viewModel, requireActivity(), it) }!!
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
         recyclerView.setHasFixedSize(true)
